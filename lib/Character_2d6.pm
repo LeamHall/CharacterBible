@@ -15,7 +15,7 @@ use warnings;
 =item new
   Requires a person object.
   
-    my $person  = Person->new("Al Lefron", 20);
+    my $person  = Person->new( _name => "Al Lefron", _age => 20);
     my $char    = Character_2d6->new($person);
 =cut
 sub new {

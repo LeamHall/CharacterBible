@@ -9,8 +9,8 @@ use Test::More;
 
 use_ok( 'Person' ) or die $!;
 
-my @data = ( 'Al', 20 );
-my $p = Person->new(@data);
+my %data = ( name => 'Al', age => 20 );
+my $p = Person->new(%data);
 
 isa_ok($p, 'Person');
 is($p->age, 20);
