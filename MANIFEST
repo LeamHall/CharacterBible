@@ -1,0 +1,12 @@
+demo/parser_1_create_sqlite_db.sql
+demo/parser_1_csv_to_sql.pl
+demo/show_person.pl
+lib/Character_2d6.pm
+lib/Person.pm
+LICENSE
+MANIFEST			This list of files
+META.json
+META.yml
+README.md
+t/lib/Character_2d6.t
+t/lib/Person.t
