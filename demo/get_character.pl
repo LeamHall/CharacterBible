@@ -1,8 +1,8 @@
 #!/usr/bin/env perl
 
 # get_character.pl
-# version:  0.0.1
-# date:     20201106
+# version:  0.1.0
+# date:     20201111
 # author:   Leam Hall
 # desc:     Get a character by a limited parameter set.
 
@@ -15,7 +15,7 @@ use Getopt::Long;
 
 my $sth;
 my $return;
-my $dbfile  = 'tmp/data/cadets.db';
+my $dbfile;
 my $dbf;
 my $dbh;
 my $column;
@@ -46,7 +46,7 @@ if ( $help ) {
 if ( $dbf ) {
   $dbfile = $dbf;
 } else {
-  $dbfile = 'tmp/data/cadets.db';
+  $dbfile = 'tmp/data/people.db';
 }
 
 if ( -f $dbfile ) {
@@ -67,6 +67,7 @@ if ( $table ) {
 
 # Use this to get the column header names, for 
 # later checking.
+# Note that this does not work with multiple tables, yet.
 $sth      = $dbh->prepare( "SELECT * from $table;" );
 $return   = $sth->execute() or die "$DBI::errstr";
 if ( $return < 0 ) {
@@ -76,25 +77,41 @@ my $fields_ref  = $sth->{NAME};
 my @fields      = values @$fields_ref;
 my %fields      = map { $_ => 1 } @fields;
 
+my $s4_query  = "select people.last_name, people.first_name, people.gender, people.notes, ";
+$s4_query     .= "chars_2d6ogl.* FROM people INNER JOIN chars_2d6ogl ON people.id = chars_2d6ogl.people_id ";
+
+# Needs better error checking.
 if ( $column && $like ) {
-  $fields{$column} or die "There is no $column column";
-  $query  .= "WHERE $column LIKE '$like' ";
+  #$fields{$column} or die "There is no $column column";
+  $s4_query  .= "WHERE $column LIKE '$like' ";
 } 
 
 # Finalize the query.
-$query  .= ";";
+$s4_query  .= ";";
 
 sub show_character {
-  my ( $year, $cadre, $id, $last_name, $first_name, $gender, 
-    $upp, $birth_year, $birth_day, $notes) = @_;
+  my ( $last_name, $first_name, $gender, $notes, $id,
+    $str, $dex, $end, $int, $edu, $soc, $psr,) = @_;
+  $last_name  = $last_name  || '';
+  $first_name = $first_name || '';
+  $gender     = $gender     || '';
+  $notes      = $notes      || '';
+  $str        = $str        || 0;
+  $dex        = $dex        || 0;
+  $end        = $end        || 0;
+  $int        = $int        || 0;
+  $edu        = $edu        || 0;
+  $soc        = $soc        || 0;
+  $psr        = $psr        || 0;
+  my $upp     = sprintf "%X%X%X%X%X%X", $str, $dex, $end, $int, $edu, $soc;
   my $line  = "$first_name $last_name [$upp] $gender\n";
   $line     .= $notes;
   $line     .= "\n"; 
   print $line;
 }
 
-$sth      = $dbh->prepare( $query );
-$return   = $sth->execute() or die "$DBI::errstr";
+$sth          = $dbh->prepare( $s4_query );
+$return       = $sth->execute() or die "$DBI::errstr";
 if ( $return < 0 ) {
   print $DBI::errstr;
 }
