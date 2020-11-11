@@ -21,14 +21,26 @@ my $dbh;
 my $column;
 my $like;
 my $table;
-my $query = "SELECT * from ";
+my $query   = "SELECT * from ";
+my $help    = 0;
 
 GetOptions(
   "c=s"   => \$column,
   "d=s"   => \$dbf,
   "l=s"   => \$like,
   "t=s"   => \$table,
+  "h"     => \$help,
 );
+
+if ( $help ) {
+  print "Usage: get_character.pl \n";
+  print "\t -c <column> \n";
+  print "\t -d <database file> \n";
+  print "\t -l <field LIKE>    '%' are acceptable \n";
+  print "\t -t <table> \n";
+  print "\t -h                 This menu \n";
+  exit;
+}
 
 
 if ( $dbf ) {
