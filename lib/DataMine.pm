@@ -31,25 +31,23 @@ sub new {
 sub file { $_[0]->{file} };
 
 sub search {
-  my ($self)  = @_;
-  #my $dbfile  = $self->file;
-  my $dbfile  = 'tmp/data/people.db';
-  #my $dbh     = DBI->connect("dbi:SQLite:dbname=$self->file", "", "") or die "Can't open $self->file: $!";
-  #my $dbh     = DBI->connect("dbi:SQLite:dbname=$dbfile", "", "") or die "Can't open $dbfile: $!";
+  my ($self)  = shift;
+  my ($column, $like )  = @_;
+  my $dbfile  = $self->file;
   my $dbh     = DBI->connect("dbi:SQLite:dbname=$dbfile", "", "") or die "Can't open $dbfile: $!";
-  my $column  = 'last_name';
-  my $like    = 'Alba';
  
-  my $query   = "SELECT people.last_name, people.first_name, people.gender, people.notes, ";
-  $query      .= "chars_2d6ogl.* FROM people INNER JOIN chars_2d6ogl ON people.id = chars_2d6ogl.people_id ";
-  $query      .= "WHERE $column LIKE '$like' ";
-  $query      .= ";";
-  my $statement = $dbh->prepare( $query );
-  my $return    = $statement->execute() or die "$DBI::errstr";
-
-  my $results   = $statement->fetchall_arrayref;
-  $dbh->disconnect();
-  return $results;
+  my $query   = qq{
+    SELECT people.last_name, people.first_name, people.gender, people.notes, chars_2d6ogl.*
+    FROM people INNER JOIN chars_2d6ogl ON people.id = chars_2d6ogl.people_id
+  };
+  if ( $column and $like ) {
+    print "column is $column and like is $like.\n";
+    $query .= qq{ WHERE ? LIKE ? };
+    #return $dbh->selectall_array( $query, { Slice => {} }, ( $column, $like ) );
+    return $dbh->selectall_array( $query, { Slice => {} }, ( 'last_name', 'Lefron' ) );
+  } else {
+    return $dbh->selectall_array( $query, { Slice => {} } );
+  }
 }
 
 1;
