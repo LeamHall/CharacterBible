@@ -46,7 +46,6 @@ if ( $help ) {
   exit;
 }
 
-
 if ( $dbf ) {
   $dbfile = $dbf;
 } else {
@@ -72,11 +71,7 @@ if ( -f $dbfile ) {
 #my %fields      = map { $_ => 1 } @fields;
 
 sub show_character {
-  # Not sure why this doesn't work.
-  #my %data  = %$_;
-
-  my ($d)  = @_;
-  my %data  = %$d;
+  my %data  = %{$_[0]};
   my $last_name  = $data{last_name}  || '';
   my $first_name = $data{first_name} || '';
   my $gender     = $data{gender}     || '';
@@ -95,12 +90,7 @@ sub show_character {
   print $line;
 }
 
-my @results;
-if ( $column and $like ){
-  @results      = $datamine->search( $column, $like );
-} else {
-  @results      = $datamine->search();
-}
+my  @results      = $datamine->search( $column, $like );
 my $result_count = scalar(@results);
 foreach  my $row ( @results) {
   print "---\n";
