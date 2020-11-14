@@ -12,9 +12,9 @@ use warnings;
 =over 4
 
 =item new
-  Requires a "name" (string) and an age (number)
+  Requires a hash of data.
 
-    my $person = Person->new( name => 'Al Lefron', age => 20);
+    my $person = Person->new( last_name => 'Lefron', first_name => 'Al');
 =cut
 
 sub new {
@@ -28,16 +28,19 @@ sub new {
   bless \%args, $class;
 }
 
-=item age
-  Returns the age.
-=cut
-sub age     { $_[0]->{age} };
+#=item age
+#  Returns the age.
+#=cut
+#sub age     { $_[0]->{age} };
 
 
 =item name
   Returns the person's name.
 =cut
-sub name    { $_[0]->{name} };
+sub name    { 
+  my ($self)  = @_;
+  return "$self->{first_name} $self->{last_name}";
+}
 
 
 =item set_stat

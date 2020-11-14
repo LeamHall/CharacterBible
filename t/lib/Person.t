@@ -9,12 +9,11 @@ use Test::More;
 
 use_ok( 'Person' ) or die $!;
 
-my %data = ( name => 'Al', age => 20 );
+my %data = ( first_name => 'Al', last_name => 'Lefron' );
 my $p = Person->new(%data);
 
 isa_ok($p, 'Person');
-is($p->age, 20);
-is($p->name, 'Al');
+is($p->name, 'Al Lefron');
 
 my %stat_data = ( str => 7 );
 $p->set_stats(%stat_data);

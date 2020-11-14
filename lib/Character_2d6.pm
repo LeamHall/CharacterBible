@@ -15,26 +15,26 @@ use warnings;
 =item new
   Requires a person object.
   
-    my $person  = Person->new( _name => "Al Lefron", _age => 20);
+    my $person  = Person->new( first_name => "Al", last_name => "Lefron");
     my $char    = Character_2d6->new($person);
 =cut
 sub new {
   my ($class) = @_;
   bless {
-    _person   => $_[1],
+    person   => $_[1],
   }, $class;
 }
 
-=item get_upp
+=item upp_str
   Returns the UPP as a string
 
-    $char->get_upp;
+    $char->upp_str;
 =cut
-sub get_upp {
+sub upp_str {
   my $self = shift;
   my $upp_str = '';
   foreach my $stat ( qw( str dex end int edu soc ) ) {
-    $upp_str .= sprintf("%X", $self->{_person}->stat_data($stat) );
+    $upp_str .= sprintf("%X", $self->{person}->stat_data($stat) );
   }
   return $upp_str;
 }
@@ -47,7 +47,7 @@ sub get_upp {
 =cut
 sub set_stats {
   my ($self, %stats) = @_;
-  $self->{_person}->set_stats(%stats);  
+  $self->{person}->set_stats(%stats);  
 }
 
 =item add_skill
@@ -57,7 +57,7 @@ sub set_stats {
 =cut
 sub add_skill {
   my ($self, $skill, $level) = @_;
-  $self->{_skills}{$skill} += $level;
+  $self->{skills}{$skill} += $level;
 }
 
 =item get_skill
@@ -67,9 +67,27 @@ sub add_skill {
 =cut
 sub get_skill {
   my ($self, $skill) = @_;
-  return $self->{_skills}{$skill};
+  return $self->{skills}{$skill};
 }
 
+=item skill_str
+  Returns an alpha sorted comma and space seperated skill list.
+
+  $char->skill_str();
+=cut
+sub skill_str {
+  my ($self)    = @_;
+  my $skill_str = '';
+  my @skills    = keys %{$self->{skills}};
+  @skills       = sort(@skills);
+  foreach my $skill ( @skills ) {
+    if ( length($skill_str) > 0 ) {
+      $skill_str .= ", ";
+    }
+    $skill_str  .= "$skill-$self->{skills}->{$skill}";
+  }
+  return $skill_str;
+}
 =back
 =cut
 
