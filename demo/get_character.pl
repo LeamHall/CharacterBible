@@ -13,6 +13,9 @@ use DBI;
 use File::Basename;
 use Getopt::Long;
 
+use lib "lib";
+use DataMine;
+
 my $sth;
 my $return;
 my $dbfile;
@@ -48,6 +51,7 @@ if ( $dbf ) {
 } else {
   $dbfile = 'tmp/data/people.db';
 }
+
 
 if ( -f $dbfile ) {
   $dbh     = DBI->connect("dbi:SQLite:dbname=$dbfile", "", "");
@@ -110,15 +114,20 @@ sub show_character {
   print $line;
 }
 
-$sth          = $dbh->prepare( $s4_query );
-$return       = $sth->execute() or die "$DBI::errstr";
-if ( $return < 0 ) {
-  print $DBI::errstr;
-}
+#$sth          = $dbh->prepare( $s4_query );
+#$return       = $sth->execute() or die "$DBI::errstr";
+#if ( $return < 0 ) {
+#  print $DBI::errstr;
+#}
 
-while ( my @row = $sth->fetchrow_array()) {
+print "dbfile is $dbfile.\n";
+my $datamine    = DataMine->new( type => 'sqlite', file => $dbfile );
+my $results_ref = $datamine->search();
+my @results     = \$results_ref;
+#while ( my @row = $sth->fetchrow_array()) {
+foreach  my $row ( @results) {
   print "---\n";
-  show_character(@row);
+  show_character($row);
   print "\n";
 }
 
