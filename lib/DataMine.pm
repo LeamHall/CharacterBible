@@ -43,8 +43,7 @@ sub search {
   if ( $column and $like ) {
     print "column is $column and like is $like.\n";
     $query .= qq{ WHERE ? LIKE ? };
-    #return $dbh->selectall_array( $query, { Slice => {} }, ( $column, $like ) );
-    return $dbh->selectall_array( $query, { Slice => {} }, ( 'last_name', 'Lefron' ) );
+    return $dbh->selectall_array( $query, { Slice => {} }, ( $column, $like ) );
   } else {
     return $dbh->selectall_array( $query, { Slice => {} } );
   }
