@@ -1,8 +1,8 @@
 #!/usr/bin/env perl
 
-# get_character.pl
-# version:  0.2.0
-# date:     20201114
+# name:     get_character.pl
+# version:  0.2.1
+# date:     20201121
 # author:   Leam Hall
 # desc:     Get a character by a limited parameter set.
 
@@ -100,7 +100,7 @@ sub show_character {
 my  @results      = $datamine->search( $column, $like );
 my $result_count = scalar(@results);
 foreach  my $row ( @results) {
-  my %data i          = %$row;
+  my %data            = %$row;
   # Yes, it is intentional to set the formerly INTEGER value to a TEXT field.  :)
   $data{plot}         = $datamine->search_by_id( 'plot', 'plots', $data{plot} );
   $data{temperament}  = $datamine->search_by_id( 'temperament', 'temperaments', $data{temperament} );

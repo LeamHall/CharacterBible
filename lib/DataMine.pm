@@ -72,8 +72,8 @@ sub search {
 
 =item search_by_id
 
-  If given a column name and a pattern to match, select those items from the database.
-  Return an array of hash references.
+  Requires a column, table, and id to search for. There should only be one response.
+  Returns a scalar value.
 =cut
 
 sub search_by_id {
