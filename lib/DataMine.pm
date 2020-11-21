@@ -59,7 +59,7 @@ sub search {
   my $dbh     = DBI->connect("dbi:SQLite:dbname=$dbfile", "", "", { RaiseError => 1 }) or die "Can't open $dbfile: $!";
  
   my $query   = qq{
-    SELECT people.last_name, people.first_name, people.gender, people.notes, chars_2d6ogl.*
+    SELECT people.last_name, people.first_name, people.gender, people.notes, people.plot, people.temperament, chars_2d6ogl.*
     FROM people INNER JOIN chars_2d6ogl ON people.id = chars_2d6ogl.people_id
   };
   if ( $column and $like ) {
@@ -68,6 +68,25 @@ sub search {
   } else {
     return $dbh->selectall_array( $query, { Slice => {} } );
   }
+}
+
+=item search_by_id
+
+  If given a column name and a pattern to match, select those items from the database.
+  Return an array of hash references.
+=cut
+
+sub search_by_id {
+  my ($self)  = shift;
+  my ($column, $table, $id )  = @_;
+  my $dbfile  = $self->file;
+  my $dbh     = DBI->connect("dbi:SQLite:dbname=$dbfile", "", "", { RaiseError => 1 }) or die "Can't open $dbfile: $!";
+ 
+  my $query   = "SELECT $column FROM $table WHERE id = $id ";
+  my $sth     = $dbh->prepare( $query ) or die "prepare statement failed: $dbh->errstr()";
+  $sth->execute() or die "execution failed: $dbh->errstr()";
+  my ($value) = $sth->fetchrow_array();
+  return $value;
 }
 
 =item search_people

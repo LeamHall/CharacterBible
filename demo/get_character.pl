@@ -72,29 +72,40 @@ if ( -f $dbfile ) {
 
 sub show_character {
   my %data  = %{$_[0]};
-  my $last_name  = $data{last_name}  || '';
-  my $first_name = $data{first_name} || '';
-  my $gender     = $data{gender}     || '';
-  my $notes      = $data{notes}      || '';
-  my $str        = $data{str}        || 0;
-  my $dex        = $data{dex}        || 0;
-  my $end        = $data{end}        || 0;
-  my $int        = $data{int}        || 0;
-  my $edu        = $data{edu}        || 0;
-  my $soc        = $data{soc}        || 0;
-  my $psr        = $data{psr}        || 0;
-  my $upp     = sprintf "%X%X%X%X%X%X", $str, $dex, $end, $int, $edu, $soc;
-  my $line  = "$first_name $last_name [$upp] $gender\n";
-  $line     .= $notes;
-  $line     .= "\n"; 
+  my $rank        = $data{rank}         || '';
+  my $last_name   = $data{last_name}    || '';
+  my $first_name  = $data{first_name}   || '';
+  my $gender      = $data{gender}       || '';
+  my $notes       = $data{notes}        || '';
+  my $str         = $data{str}          || 0;
+  my $dex         = $data{dex}          || 0;
+  my $end         = $data{end}          || 0;
+  my $int         = $data{int}          || 0;
+  my $edu         = $data{edu}          || 0;
+  my $soc         = $data{soc}          || 0;
+  my $psr         = $data{psr}          || 0;
+  my $plot        = $data{plot}         || '';
+  my $temperament = $data{temperament}  || '';
+  my $upp         = sprintf "%X%X%X%X%X%X", $str, $dex, $end, $int, $edu, $soc;
+  my $line;
+  $line           .= "$rank " if $rank;
+  $line           .= "$first_name $last_name [$upp] $gender\n";
+  $line           .= "Plot: $plot \n" if $plot;
+  $line           .= "Temperament: $temperament \n" if $temperament;
+  $line           .= "Notes: $notes" if $notes;
+  $line           .= "\n"; 
   print $line;
 }
 
 my  @results      = $datamine->search( $column, $like );
 my $result_count = scalar(@results);
 foreach  my $row ( @results) {
+  my %data i          = %$row;
+  # Yes, it is intentional to set the formerly INTEGER value to a TEXT field.  :)
+  $data{plot}         = $datamine->search_by_id( 'plot', 'plots', $data{plot} );
+  $data{temperament}  = $datamine->search_by_id( 'temperament', 'temperaments', $data{temperament} );
   print "---\n";
-  show_character($row);
+  show_character(\%data);
   print "\n";
 }
 
