@@ -86,10 +86,18 @@ sub show_character {
   my $psr         = $data{psr}          || 0;
   my $plot        = $data{plot}         || '';
   my $temperament = $data{temperament}  || '';
+  my %skills      = %{ $data{skills}    || {} };
   my $upp         = sprintf "%X%X%X%X%X%X", $str, $dex, $end, $int, $edu, $soc;
   my $line;
   $line           .= "$rank " if $rank;
   $line           .= "$first_name $last_name [$upp] $gender\n";
+  my $skill_line  = '';
+  foreach my $skill ( sort (keys %skills) ) {
+    $skill_line   .= ", " if $skill_line;
+    my $level     = $skills{$skill};
+    $skill_line   .= "$skill-$level";
+  }
+  $line           .= "$skill_line\n" if $skill_line;
   $line           .= "Plot: $plot \n" if $plot;
   $line           .= "Temperament: $temperament \n" if $temperament;
   $line           .= "Notes: $notes" if $notes;
@@ -97,13 +105,14 @@ sub show_character {
   print $line;
 }
 
-my  @results      = $datamine->search( $column, $like );
+my  @results      = $datamine->search_2d6ogl( $column, $like );
 my $result_count = scalar(@results);
 foreach  my $row ( @results) {
   my %data            = %$row;
   # Yes, it is intentional to set the formerly INTEGER value to a TEXT field.  :)
   $data{plot}         = $datamine->search_by_id( 'plot', 'plots', $data{plot} );
   $data{temperament}  = $datamine->search_by_id( 'temperament', 'temperaments', $data{temperament} );
+  $data{skills}       = $datamine->get_person_skills( $data{id} );
   print "---\n";
   show_character(\%data);
   print "\n";

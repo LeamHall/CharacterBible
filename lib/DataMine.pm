@@ -52,14 +52,14 @@ sub file { $_[0]->{file} };
   Return an array of hash references.
 =cut
 
-sub search {
+sub search_2d6ogl {
   my ($self)  = shift;
   my ($column, $like )  = @_;
   my $dbfile  = $self->file;
   my $dbh     = DBI->connect("dbi:SQLite:dbname=$dbfile", "", "", { RaiseError => 1 }) or die "Can't open $dbfile: $!";
  
   my $query   = qq{
-    SELECT people.last_name, people.first_name, people.gender, people.notes, people.plot, people.temperament, chars_2d6ogl.*
+    SELECT people.id, people.last_name, people.first_name, people.gender, people.notes, people.plot, people.temperament, chars_2d6ogl.*
     FROM people INNER JOIN chars_2d6ogl ON people.id = chars_2d6ogl.people_id
   };
   if ( $column and $like ) {
@@ -112,6 +112,35 @@ sub search_people {
     return $dbh->selectall_array( $query, { Slice => {} } );
   }
 }
+
+=item get_person_skills
+
+  If given a person_id, return a hash of skills, with levels.
+=cut
+
+sub get_person_skills {
+  my ($self, $search_id)  = @_;
+  my $dbfile  = $self->file;
+  my $dbh     = DBI->connect("dbi:SQLite:dbname=$dbfile", "", "", { RaiseError => 1 }) or die "Can't open $dbfile: $!";
+ 
+  my $query   = qq{
+    SELECT skill, level 
+    FROM peopleskills, skills
+    WHERE peopleskills.skill_id = skills.id
+      AND peopleskills.people_id = ? 
+    }; 
+ 
+  my %skills; 
+  my @skill_list  = $dbh->selectall_array( $query, { Slice => {} }, $search_id);
+  foreach my $s ( @skill_list ) {
+    my $skill       = %{$s}{skill};
+    my $level       = %{$s}{level};
+    $skills{$skill} = $level;
+  }
+  return \%skills;
+};
+
+
 
 =item update_person
 
