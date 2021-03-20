@@ -11,26 +11,26 @@ import sys
 sys.path.append('lib')
 
 from person import Person
+from character_2d6 import Character_2d6
 
 date = 1429360
 
 al = Person( 'Alba Ester Domici', 1416146, 'Birach', 
       ['Firster', 'Saorsa', 'Domici', 'Firster Academy', 'Clan', 'Dragon'])
-
 # Really need a builder
 al.set_age(date)
+for person in [al]:  
+  print(person)
 
-# This needs to go into the game specific module.
-al.stats = {'str' : 8, 'dex': 7, 'end': 11, 'int': 6, 'edu': 8, 'soc': 12 }
-al.set_upp()
-
-wilbur = Person( 'Wilbur Lefron', 1416075, 'Saorsa', 
-     ['Firster Academy', 'Clan', 'Saorsa', 'Navy'])
-wilbur.set_age(date)
-wilbur.gender = 'M'
 
 amanda = Person( 'Amanda Lefron', 1430000)
 
-#for person in [al, wilbur, amanda]:
-for person in [al]:  
-  print(person)
+wilbur = Character_2d6( 'Wilbur Lefron', 1416075, 'Saorsa', 
+     ['Firster Academy', 'Clan', 'Saorsa', 'Navy'])
+wilbur.set_age(date)
+wilbur.gender = 'M'
+wilbur.stats = {'str' : 9, 'dex': 7, 'end': 13, 'int': 9, 'edu': 10, 'soc': 11 }
+wilbur.set_upp()
+
+for char in [wilbur]:
+  print(char)

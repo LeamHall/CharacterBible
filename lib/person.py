@@ -1,8 +1,13 @@
-# person.py
+
+# name:     person.py
+# version:  0.0.1
+# date:     20210320
+# author:   Leam Hall
+# desc:     Base Person object.
 
 class Person:
 
-  def __init__(self, name = '', birth_date = 0, birth_world = '', cultures = [], stats = {}, gender = 'F', age = 'unborn' ):
+  def __init__(self, name = '', birth_date = 0, birth_world = '', cultures = [], gender = 'F' ):
     """
     (Person, str, int, str, list of str) ->NoneType
     
@@ -29,8 +34,6 @@ class Person:
     self.birth_world  = birth_world
     self.cultures     = cultures[:]
     self.gender       = gender
-    self.stats        = stats
-    self.age          = age
 
     
   def get_age(self, year):
@@ -73,31 +76,6 @@ class Person:
     self.age = years
 
 
-  def set_upp(self):
-    """
-    (Person) -> NoneType
-
-    Requires the UPP stats to already be set.
-    Sets the UPP based on the character's stats.
-
-    >>> al = Person ( \
-              'Alba Ester Domici', 1416146, 'Birach', \
-              ['Firster', 'Saorsa', 'Domici', 'Firster Academy', 'Clan', 'Dragon'] \
-              )
-    >>> al.stats = {'str' : 8, 'dex': 7, 'end': 11, 'int': 6, 'edu': 8, 'soc': 12 }
-    >>> al.set_upp()
-    >>> al.upp
-    '87B68C'
-    """
-
-    # Need an error process that fails gracefully if the stat isn't defined.
-    upp_string = ''
-    for stat in [ 'str', 'dex', 'end', 'int', 'edu', 'soc']:
-      upp_string += "{:X}".format(self.stats[stat])
-
-    self.upp = upp_string 
-
-
   def num_cultures(self):
     """
     (Person) -> Int
@@ -126,13 +104,11 @@ class Person:
               ['Firster', 'Saorsa', 'Domici', 'Firster Academy', 'Clan', 'Dragon'] \
               )
     >>> al.set_age(1429360)
-    >>> al.stats = {'str' : 8, 'dex': 7, 'end': 11, 'int': 6, 'edu': 8, 'soc': 12 }
-    >>> al.set_upp()
     >>> print(al)
-    Alba Ester Domici [87B68C] F Age: 13
+    Alba Ester Domici F Age: 13
     """
 
-    return "{0} [{1}] {2} Age: {3}".format(self.name, self.upp, self.gender, self.age)
+    return "{0} {1} Age: {2}".format(self.name, self.gender, self.age)
 
 
 if __name__ == "__main__":
