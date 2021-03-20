@@ -1,0 +1,98 @@
+# merchant_base_skills
+Brawling
++1 Str
+Carouse
+Gambling
++1 End
++1 Dex
++1 End
++1 Edu
+Carouse
+VaccSuit
+Gambling
++1 Dex
+Blade
+Brawling
+GunCbt
+Blade
+Mechanical
+ShipsBoat
+VaccSuit
+ZeroG
+Commo
+Admin
+JoT
+Carouse
+Vehicle
+Survival
+VaccSuit
+GunCbt
+Blade
+Mechanical
+Leader
+Medic
+ZeroG
++1 Edu
+Instruction
+Admin
+Vehicle
++1 End
+GunCbt
+ShipsBoat
+Bribery
++1 Dex
++1 Soc
+ShipsBoat
+Vehicle
+Navigation
+Engineering
+Mechanical
+Electronics
+GunCbt
+Navigation
+Computer
+Liaison
+ZeroG
+VaccSuit
+Admin
+GunCbt
+Commo
+ShipsBoat
+Navigation
+Pilot
+FwdObs
+GunCbt
+Commo
+Computer
+Gunnery
+Mechanical
+Electronic
+Eng
+Broker
+Broker
+Broker
+Broker
+Broker
+Mechanical
+VaccSuit
+Eng
+Steward
+Eng
+Admin
+JoT
+Electronic
+Admin
+Medical
+Computer
+Medical
+Medical
+Steward
+Mechanical
+Steward
+Electronic
+Computer
+Computer
+Gravitics
+JoT
+Leader
+

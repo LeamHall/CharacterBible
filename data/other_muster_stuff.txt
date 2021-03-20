@@ -1,0 +1,7 @@
+# other_muster_out
+LowPsg
++1 Int
++1 Edu
+Gun
+HighPsg
+

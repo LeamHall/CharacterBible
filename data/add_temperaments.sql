@@ -1,0 +1,18 @@
+BEGIN DEFERRED;
+INSERT INTO temperaments (temperament) VALUES ( 'Crafter' );
+INSERT INTO temperaments (temperament) VALUES ( 'Promoter' );
+INSERT INTO temperaments (temperament) VALUES ( 'Composer' );
+INSERT INTO temperaments (temperament) VALUES ( 'Performer' );
+INSERT INTO temperaments (temperament) VALUES ( 'Inspector' );
+INSERT INTO temperaments (temperament) VALUES ( 'Supervisor' );
+INSERT INTO temperaments (temperament) VALUES ( 'Protector' );
+INSERT INTO temperaments (temperament) VALUES ( 'Provider' );
+INSERT INTO temperaments (temperament) VALUES ( 'Counselor' );
+INSERT INTO temperaments (temperament) VALUES ( 'Teacher' );
+INSERT INTO temperaments (temperament) VALUES ( 'Healer' );
+INSERT INTO temperaments (temperament) VALUES ( 'Champion' );
+INSERT INTO temperaments (temperament) VALUES ( 'Mastermind' );
+INSERT INTO temperaments (temperament) VALUES ( 'Fieldmarshal' );
+INSERT INTO temperaments (temperament) VALUES ( 'Architect' );
+INSERT INTO temperaments (temperament) VALUES ( 'Inventor' );
+END;

@@ -9,6 +9,8 @@
 *.pm.tdy
 *.bs
 
+__pycache__
+
 # Devel::Cover
 cover_db/
 

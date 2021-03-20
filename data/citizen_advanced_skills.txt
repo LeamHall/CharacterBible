@@ -1,0 +1,8 @@
+# citizen_advanced_skills
+Medic
+Computer
+Admin
+Liaison
+Leader
+Electronics
+JoT

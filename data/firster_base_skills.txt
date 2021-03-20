@@ -1,0 +1,14 @@
+# firster_base_skills
++1 Str
++1 Dex
++1 End
++1 Int
+Carouse
+Brawling
+GunCbt
+Blade
+Recon
+Survival
+Vehicle
+Bribery
+Leader

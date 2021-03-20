@@ -1,0 +1,87 @@
+# Starting with CE and moving forward.
+
+Agent
+Army Enlisted
+Army Officer
+Army Flag
+Athlete
+Barbarian
+Belter
+Broker
+Bureaucrat
+Celebrity
+Colonist
+Con Artist
+Corporate Executive
+Courier
+Diplomat
+Drifter
+Educator
+Entertainer
+Financier
+Fugitive
+Guide
+Gray Coat (former)
+Hijacker
+Hunter
+Marine Enlisted
+Marine Officer
+Marine Flag
+Mercenary
+Merchant Rating
+Merchant Officer
+Merchant Free Trader Captain
+Miner
+
+Navy Enlisted
+Navy Officer
+Navy Flag
+Noble
+Path
+Physician
+Pirate
+Politician
+Rogue
+Scientist
+Scout
+Smuggler
+System Defense Officer
+Technician
+Terrorist
+Tourist
+Wet Navy Merchant Marine Sailor
+Wet Navy Merchant Marine Officer
+Adventurers
+Starship Crew
+Ambushing Brigands
+Bandits
+Beggars
+Belters
+Drunken Crew 
+Fugitives
+Government Officials
+Guards
+Hunters and Guides
+Law Enforcers on Patrol
+Local Performers
+Maintenance Robots
+Merchants
+Noble with Retinue
+Peasants
+Political Dissident
+Potential Patron
+Public Demonstration
+Religious Pilgrims
+Reporters
+Researchers
+Riotous Mob
+Security Troops
+Servant Robots
+Soldiers on Patrol
+Street Vendors
+Technicians
+Thugs
+Tourists
+Traders
+Vigilantes
+Workers

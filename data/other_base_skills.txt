@@ -1,0 +1,19 @@
+# other_base_skills
++1 Str
++1 Dex
++1 Edu
+-1 Soc
+Brawling
+Blade
+Vehicle
+Gambling
+Brawling
+Bribery
+Blade
+GunCbt
+Streetwise
+Mechanical
+Electronic
+Gambling
+Brawling
+Forgery

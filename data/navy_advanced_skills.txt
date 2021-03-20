@@ -1,0 +1,22 @@
+# navy_advanced_skills
+Medic
+Computer
+Admin
+Liaison
+Leader
+Pilot
+ShipTactics
+Leader
+ShipTactics
+Computer
+Electronics
+GunCbt
+Admin
+Bribery
+ShipTactics
+FleetTactics
++1 Int
+ShipTactics
+FleetTactics
+JoT
+

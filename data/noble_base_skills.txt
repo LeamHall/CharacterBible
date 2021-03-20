@@ -1,0 +1,19 @@
+# noble_base_skills
+
++1 Int
++1 Edu
+Carousing
+JoT
+Leader
+Brawling
+Hunting
+Pilot
+Leader
+GunCbt
+Vehicle
+Medical
+Leader
+Carousing
+Liaison
+Bribery
+Gambling
