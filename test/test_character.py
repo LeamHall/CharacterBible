@@ -7,7 +7,7 @@
 # desc:     Testing Base Person object.
 
 import unittest
-from person import Person
+from person import character
 
 class TestPerson(unittest.TestCase):
 
