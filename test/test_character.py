@@ -1,20 +1,22 @@
 #!/usr/bin/env python3
 
-# name:     test_person.py
+# name:     test_character.py
 # version:  0.0.1
 # date:     20210422
 # author:   Leam Hall
-# desc:     Testing Base Person object.
+# desc:     Testing 2d6 OGL Character object
 
 import unittest
-from person import character
+from person.character import Character
+from person.person import Person
 
 class TestPerson(unittest.TestCase):
 
   def test_creation(self):
     # Note that this also tests "creation_empty_data".  :)
-    al = person.Person()
-    self.assertIsInstance(al, person.Person)
+    al = Character()
+    self.assertIsInstance(al, Character)
+    self.assertIsInstance(al, Person)
 
   def test_creation_full_data(self):
     # Can add an existing person's data

@@ -7,14 +7,14 @@
 # desc:     Testing Base Person object.
 
 import unittest
-from person import Person
+from person.person import Person as Person
 
 class TestPerson(unittest.TestCase):
 
   def test_creation(self):
     # Note that this also tests "creation_empty_data".  :)
-    al = person.Person()
-    self.assertIsInstance(al, person.Person)
+    al = Person()
+    self.assertIsInstance(al, Person)
 
   def test_creation_full_data(self):
     # Can add an existing person's data
@@ -28,27 +28,6 @@ class TestPerson(unittest.TestCase):
   def test_get_attr(self):
     # Graceful fail if attr not present.
     # Value if present.
-    pass
-
-  def test_gen_upp(self):
-    # Given a valid set of stats, can generate a UPP string.
-    # Does this need a different process, since it doesn't cover
-    # 3d6 and d% games?
-    # What if numbers for UPP are:
-    #  - missing
-    #  - invalid ( < 0 or > 15)
-    pass
-
-  def test_get_stat(self):
-    # Can pull a specific stat.
-    # What if that stat doesn't exist?
-    #  - unset
-    #  - wrong game
-    pass
-     
-  def test_set_stats(self):
-    # Can set stats post instance creation.
-    # What if only some stats are given?
     pass
 
   def test_modify_skill(self): 
