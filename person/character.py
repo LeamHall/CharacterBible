@@ -53,11 +53,17 @@ class Character(Person):
   12
 
   ''' Skills '''
-  >>> al.modify_skill('blade', 2)
-  >>> al.get_skill('blade')
+  >>> al.modify_skill('Blade', 2)
+  >>> al.get_skill('Blade')
   2
   >>> al.get_skill('kissing') is None
   True
+  >>> al.modify_skill('GunCbt', '2')
+  
+   
+  # Supplement 4 layout
+  >>> print(al)
+  Al Lefron [66A66C] F Blade-2, GunCbt-2
 
   """
     
@@ -83,6 +89,24 @@ class Character(Person):
   def set_stats(self, stat_data):
     self.stats = stat_data
 
+  def __str__(self):
+    string = "{} {} [{}] {} ".format(
+      self.first_name, 
+      self.last_name, 
+      self.upp, 
+      self.gender)
+    skill_string = ''
+    if len(self.skills):
+      for skill in self.skills:
+        if len(skill_string) > 0:
+          skill_string += ', '
+        skill_string += "{}-{}".format(
+          skill,
+          self.get_skill(skill)
+          )
+    return string + skill_string
+
+    
 if __name__ == "__main__":
   import doctest
   doctest.testmod()
