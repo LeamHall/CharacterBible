@@ -33,4 +33,5 @@ wilbur.set_attr('gender', 'M')
 w_stats = {'str' : 9, 'dex': 7, 'end': 13, 'int': 9, 'edu': 10, 'soc': 11 }
 wilbur.set_stats(w_stats)
 wilbur.gen_upp()
-print("{} {} [{}] {}".format(wilbur.first_name, wilbur.last_name, wilbur.gender, wilbur.upp))
+#print("{} {} [{}] {}".format(wilbur.first_name, wilbur.last_name, wilbur.gender, wilbur.upp))
+print(wilbur.supp_4())

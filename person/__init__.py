@@ -1,2 +1,3 @@
-from . import Person
-from . import Character
+from .person import Person
+from .character import Character
+from .person_builder import PersonBuilder

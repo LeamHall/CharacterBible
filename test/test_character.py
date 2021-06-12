@@ -6,19 +6,9 @@
 # author:   Leam Hall
 # desc:     Testing 2d6 OGL Character object
 
-# This isn't a package yet, so the 'person' has to be added to sys.path.
-import sys
-sys.path.append('person')
-
 import unittest
-#from person.character import Character
-#from person.person import Person
-#from person.person import Person as Person
-#from person.character import Character as Character
-#from person import Person
+from person import Person
 from person import Character
-
-#from person import Person
 
 class TestCharacter(unittest.TestCase):
 
