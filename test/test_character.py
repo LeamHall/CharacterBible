@@ -6,11 +6,19 @@
 # author:   Leam Hall
 # desc:     Testing 2d6 OGL Character object
 
-import unittest
-from person.character import Character
-from person.person import Person
+# This isn't a package yet, so the 'person' has to be added to sys.path.
+import sys
+sys.path.append('person')
 
-class TestPerson(unittest.TestCase):
+import unittest
+#from person.character import Character
+#from person.person import Person
+from person.person import Person as Person
+from person.character import Character as Character
+
+#from person import Person
+
+class TestCharacter(unittest.TestCase):
 
   def test_creation(self):
     # Note that this also tests "creation_empty_data".  :)
