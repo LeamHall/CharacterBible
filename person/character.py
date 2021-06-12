@@ -9,9 +9,10 @@
 from dataclasses import dataclass, field
 #from .person import Person # This way works with doctest.
 #from person.person import Person      # Another way, doesn't work with doctest
-from person import Person      # Another way, doesn't work with doctest
+#from .person import Person      # Another way, doesn't work with doctest
 #import person.Person      # Yet another way, doesn't work with doctest or unittest.
 # from typing import Any   # If a type needs to vary.
+import person
 
 @dataclass
 class Character(Person):
