@@ -7,8 +7,9 @@
 # desc:     Object for 2d6 OGL Sci-Fi games.
 
 from dataclasses import dataclass, field
-from .person import Person # This way works with doctest.
+#from .person import Person # This way works with doctest.
 #from person.person import Person      # Another way, doesn't work with doctest
+from person import Person      # Another way, doesn't work with doctest
 #import person.Person      # Yet another way, doesn't work with doctest or unittest.
 # from typing import Any   # If a type needs to vary.
 
@@ -25,16 +26,16 @@ class Character(Person):
   >>> al.first_name
   'Al'
 
-  >>> al.add_attr('gender', 'F')
+  >>> al.set_attr('gender', 'F')
   >>> al.get_attr('gender')
   'F'
 
-  >>> al.add_attr('last_name', "Lefron")
+  >>> al.set_attr('last_name', "Lefron")
   >>> al.first_name + ' ' + al.last_name
   'Al Lefron'
 
   ''' Unspecified attributes '''
-  >>> al.add_attr('zaniness', 'high')
+  >>> al.set_attr('zaniness', 'high')
   >>> al.get_attr('zaniness')
   'high'
   >>> al.get_attr('social grace') is None
@@ -59,8 +60,12 @@ class Character(Person):
   >>> al.get_skill('kissing') is None
   True
 
+  ''' Supp 4 Output '''
+  >>> al.supp_4()
+  'Al Lefron [F] 66A66C'
+
   """
-    
+  skills:     dict = field(default_factory=dict)
   stats:      dict = field(default_factory=dict)
   upp:        str = None
 
@@ -82,6 +87,24 @@ class Character(Person):
 
   def set_stats(self, stat_data):
     self.stats = stat_data
+
+  def get_skill(self, skill_name):
+    if skill_name in self.skills:
+      return self.skills[skill_name]
+    else:
+      return None
+
+  def modify_skill(self, skill_name, value = 1): 
+    if skill_name in self.skills:
+      self.skills[skill_name] += value
+    else:
+      self.skills[skill_name] = value
+
+  def supp_4(self):
+    output_string = "{} {} [{}] {}".format(
+      self.first_name, self.last_name, self.gender, self.upp)
+    return output_string
+
 
 if __name__ == "__main__":
   import doctest
