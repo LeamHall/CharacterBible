@@ -18,7 +18,7 @@ use DataMine;
 
 my $sth;
 my $return;
-my $dbfile  = 'tmp/data/people.db';
+my $dbfile  = 'data/people.db';
 my $dbf;
 my $dbh;
 my $id;
@@ -51,9 +51,6 @@ if ( $help ) {
 
 if ( $dbf ) {
   $dbfile = $dbf;
-} else {
-  # Why is this duplicated?
-  $dbfile = 'tmp/data/people.db';
 }
 
 if ( -f $dbfile ) {

@@ -15,7 +15,7 @@ use Getopt::Long;
 
 my $sth;
 my $return;
-my $dbfile  = 'tmp/data/people.db';
+my $dbfile  = 'data/people.db';
 my $dbf;
 my $dbh;
 my $column;
@@ -23,12 +23,14 @@ my $like;
 my $table;
 my $query   = "SELECT * from ";
 my $help    = 0;
+my $verbose = 0;
 
 GetOptions(
   "c=s"   => \$column,
   "d=s"   => \$dbf,
   "l=s"   => \$like,
   "t=s"   => \$table,
+  "v"     => \$verbose,
   "h"     => \$help,
 );
 
@@ -38,6 +40,7 @@ if ( $help ) {
   print "\t -d <database file> \n";
   print "\t -l <field LIKE>    '%' are acceptable \n";
   print "\t -t <table> \n";
+  print "\t -v                 Verbose response \n";
   print "\t -h                 This menu \n";
   exit;
 }
@@ -45,9 +48,6 @@ if ( $help ) {
 
 if ( $dbf ) {
   $dbfile = $dbf;
-} else {
-  # Why is this duplicated?
-  $dbfile = 'tmp/data/people.db';
 }
 
 if ( -f $dbfile ) {
@@ -103,6 +103,9 @@ sub show_character {
   $line         .= "Plot: $plot \n";
   $line         .= "Temperament: $temperament \n";
   $line         .= "Notes: $notes \n";
+  if ( $verbose ){
+    $line       .= "ID: $id \n";
+  }
   print $line;
 }
 

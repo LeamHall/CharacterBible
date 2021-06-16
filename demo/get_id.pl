@@ -18,7 +18,7 @@ use DataMine;
 
 my $sth;
 my $return;
-my $dbfile  = 'tmp/data/people.db';
+my $dbfile  = 'data/people.db';
 my $dbf;
 my $dbh;
 my $column;
@@ -48,13 +48,11 @@ if ( $help ) {
 
 if ( $dbf ) {
   $dbfile = $dbf;
-} else {
-  # Why is this duplicated?
-  $dbfile = 'tmp/data/people.db';
 }
 
 if ( -f $dbfile ) {
   $datamine = DataMine->new( type => 'sqlite', file => $dbfile );
+  #DBI->connect("dbi:SQLite:dbname=$dbfile", "", "");
 } else {
   die "Can't find $dbfile: $!";
 }
