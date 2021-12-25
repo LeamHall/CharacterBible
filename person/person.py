@@ -11,48 +11,32 @@ from dataclasses import dataclass, field
 
 @dataclass
 class Person:
-  """
-  >>> al = Person()
+  """ Base Person object """
 
-  ''' Existing attributes '''
-  >>> al.first_name = "Al"
-  >>> al.first_name
-  'Al'
+  physical:       list  = field(default_factory=list)
+  mental:         dict  = field(default_factory=dict)
+  first_name:     str   = ''
+  last_name:      str   = ''
+  gender:         str   = ''
+  birth_info:     dict  = field(default_factory=dict)
+  notes:          str   = ''
+  relationships:  dict  = field(default_factory=dict)
+  culturesr:      list  = field(default_factory=list)
 
-  >>> al.set_attr('gender', 'F')
-  >>> al.get_attr('gender')
-  'F'
-
-  >>> al.set_attr('last_name', "Lefron")
-  >>> al.first_name + ' ' + al.last_name
-  'Al Lefron'
-
-  ''' Unspecified attributes '''
-  >>> al.set_attr('zaniness', 'high')
-  >>> al.get_attr('zaniness')
-  'high'
-  >>> al.get_attr('social grace') is None
-  True
-
-
-  """
-
-  physical:   str = ''
-  mental:     str = ''
-  first_name: str = ''
-  last_name:  str = ''
-  gender:     str = ''
-  birth_year: int = 0
-  birth_day:  int = 0
-  notes:      str = ''
-
-
-  def set_attr(self, attr, value):
-    setattr(self, attr, value)
-
+  def set_attr(self, attr, value, key = None):
+    # For the list and the dict, it assumes they already exist.
+    attr_type = getattr(self, attr)
+    if isinstance(attr_type, list):
+      self.attr.append(value)
+    elif isinstance(attr_type, dict) and key != None:
+      self.attr[key] = value
+    else:
+      setattr(self, attr, value)
+  
   def get_attr(self, attr):
     if hasattr(self, attr):
-      return getattr(self,attr)
+      #return getattr(self,attr)
+      return self.attr
     else:
       return None
 
