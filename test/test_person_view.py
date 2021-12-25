@@ -6,22 +6,21 @@
 
 import pytest
 
+from person import person
 from view import person as person_view
 
 def test_have_data(person_data):
-  expected_who  = 'Alba'
-  expected_whom = 'Wilbur'
-  assert person_data['who'] == expected_who
-  assert person_data['whom'] == expected_whom
+  expected_first_name  = 'Alba'
+  assert person_data.first_name == expected_first_name
 
 def test_to_text(person_data):
   actual_string   = person_view.to_text(person_data)
-  expected_string = "Alba kissed Wilbur"
+  expected_string = "Alba Domici [F] Short blond hair, raging blue eyes. Scar over right eyebrow."
   assert actual_string == expected_string
 
 def test_to_html(person_data):
   actual_string   = person_view.to_html(person_data)
-  expected_string = "<p>Alba really kissed Wilbur!</p>"
+  expected_string = "<p>Alba Domici [F] Short blond hair, raging blue eyes. Scar over right eyebrow.</p>"
   assert actual_string == expected_string
 
 def test_bad_output_type(person_data):
@@ -29,13 +28,13 @@ def test_bad_output_type(person_data):
     person_view.char_string(person_data, 'xml')
 
 def test_char_string_text(person_data):
-  actual_string   = person_view.char_string(person_data, 'text')
-  expected_string = "Alba kissed Wilbur"
+  actual_string   = person_view.to_text(person_data)
+  expected_string = "Alba Domici [F] Short blond hair, raging blue eyes. Scar over right eyebrow."
   assert actual_string == expected_string
 
 def test_char_string_html(person_data):
-  actual_string   = person_view.char_string(person_data, 'html')
-  expected_string = "<p>Alba really kissed Wilbur!</p>"
+  actual_string   = person_view.to_html(person_data)
+  expected_string = "<p>Alba Domici [F] Short blond hair, raging blue eyes. Scar over right eyebrow.</p>"
   assert actual_string == expected_string
 
   

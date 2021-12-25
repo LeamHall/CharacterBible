@@ -5,10 +5,15 @@
 # desc:     Shared data for tests.
 
 import pytest
+from person import Person
 
 @pytest.fixture()
 def person_data():
-  data = dict(who = "Alba", whom = "Wilbur")
-  return data
+  p             = Person()
+  p.first_name  = "Alba"
+  p.last_name   = "Domici"
+  p.gender      = "f"
+  p.physical    = "Short blond hair, raging blue eyes. Scar over right eyebrow." 
+  return p 
 
 

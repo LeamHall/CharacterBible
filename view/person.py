@@ -4,16 +4,16 @@
 # author:   Leam Hall
 # desc:     Formatting data for various output types.
 
-from string import Template
-
 def to_text(data):
-  t = Template('$who kissed $whom')
-  return t.substitute(data)
+  string = "{} {} [{}] {}".format(data.first_name, data.last_name,
+    data.gender.upper(), data.physical)
+  return string
 
 def to_html(data):
-  t = Template('<p>$who really kissed $whom!</p>')
-  return t.substitute(data)
-
+  string = "<p>{} {} [{}] {}</p>".format(data.first_name, data.last_name,
+    data.gender.upper(), data.physical)
+  return string
+  
 def char_string(data, output_type = 'text'):
   if output_type    == 'html':
     out_str = to_html(data)
