@@ -12,21 +12,31 @@ from person import Person
 def test_creation(person):
   assert isinstance(person, Person)
 
-@pytest.mark.skip()
 def test_creation_full_data():
-  # Can add an existing person's data
-  pass
+  wilbur = Person(first_name = "Wilbur", last_name = "Lefron", 
+    physical = ['Wavy black hair', 'Pale skin'], mental = { 'plot': 'Save the Princess'} )
+  assert wilbur.get_attr('first_name') == 'Wilbur'
 
 def test_set_attr_string(person):
-  person.set_attr('last_name', 'Lefron')
-  expected_attr = 'Lefron'
-  assert person.get_attr('last_name') == expected_attr
+  person.set_attr('middle_name', 'Ester')
+  expected_attr = 'Ester'
+  assert person.get_attr('middle_name') == expected_attr
 
 def test_set_attr_list(person):
   person.set_attr('physical', 'Short blond hair')
-  expected_attr = 'Short blond hair'
-  physical = person.get_attr('physical')
-  assert physical[0] == expected_attr
+  person.set_attr('physical', 'Scar over right eyebrow')
+  expected_attr_0 = 'Short blond hair'
+  expected_attr_1 = 'Scar over right eyebrow'
+  physical = getattr(person, 'physical')
+  assert physical[-1] == expected_attr_1
+  assert physical[-2] == expected_attr_0
+
+def test_set_attr_dict(person):
+  k = 'plot'
+  person.set_attr('mental', 'fight great evil', k)
+  expected_attr = 'fight great evil'
+  mental = getattr(person, 'mental')
+  assert mental[k] == expected_attr
 
 @pytest.mark.skip()
 def test_get_attr(self):

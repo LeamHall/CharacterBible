@@ -13,7 +13,7 @@ def person():
   p.first_name  = "Alba"
   p.last_name   = "Domici"
   p.gender      = "f"
-  #p.physical    = "Short blond hair, raging blue eyes. Scar over right eyebrow." 
+  p.physical    = ["Short blond hair", "raging blue eyes", "Scar over right eyebrow."] 
   return p 
 
 

@@ -25,18 +25,22 @@ class Person:
 
   def set_attr(self, attr, value, key = None):
     # For the list and the dict, it assumes they already exist.
-    attr_type = getattr(self, attr)
-    if isinstance(attr_type, list):
-      self.attr.append(value)
-    elif isinstance(attr_type, dict) and key != None:
-      self.attr[key] = value
-    else:
+    try:
+      attr_type = getattr(self, attr)
+      if isinstance(attr_type, list):
+        attr_type.append(value)
+      elif isinstance(attr_type, dict) and key != None:
+        if key:
+          print("in dict, key is " + key)
+        attr_type[key] = value
+      else:
+        attr_type = value
+    except:
       setattr(self, attr, value)
-  
+ 
   def get_attr(self, attr):
     if hasattr(self, attr):
-      #return getattr(self,attr)
-      return self.attr
+      return getattr(self,attr)
     else:
       return None
 
