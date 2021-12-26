@@ -23,6 +23,6 @@ def pb():
 @pytest.fixture()
 def person_base():
   pb = PersonBuilder()
-  person_base = pb.return_person()
+  person_base = pb.set_data()
   return person_base
 

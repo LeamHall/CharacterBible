@@ -8,21 +8,17 @@ from person import Person
 
 class PersonBuilder:
 
-  def __init__(self, data = {}):
-    self.person = Person()
-    self.set_data(data)
-
-
-  def set_data(self, data):
-    self.person.physical      = data.get('physical',      self.gen_physical())
-    self.person.mental        = data.get('mental',        self.gen_mental())
-    self.person.first_name    = data.get('first_name',    self.gen_firstname(self.person.gender))
-    self.person.last_name     = data.get('last_name',     self.gen_lastname())
-    self.person.gender        = data.get('gender',        self.gen_gender())
-    self.person.birth_info    = data.get('birth_info',    self.gen_birthinfo()) 
-    self.person.notes         = data.get('notes',         '')
-    self.person.relationships = data.get('relationships', {})
-    self.person.cultures      = data.get('cultures',      [])
+  def set_data(self, person, data = {}):
+    person.gender        = data.get('gender',        self.gen_gender())
+    person.physical      = data.get('physical',      self.gen_physical())
+    person.mental        = data.get('mental',        self.gen_mental())
+    person.first_name    = data.get('first_name',    self.gen_firstname(person.gender))
+    person.last_name     = data.get('last_name',     self.gen_lastname())
+    person.birth_info    = data.get('birth_info',    self.gen_birthinfo()) 
+    person.notes         = data.get('notes',         '')
+    person.relationships = data.get('relationships', {})
+    person.cultures      = data.get('cultures',      [])
+    return person
 
   def gen_firstname(self, gender):
     return 'John'
