@@ -21,7 +21,7 @@ class Person:
   birth_info:     dict  = field(default_factory=dict)
   notes:          str   = ''
   relationships:  dict  = field(default_factory=dict)
-  culturesr:      list  = field(default_factory=list)
+  cultures:       list  = field(default_factory=list)
 
   def set_attr(self, attr, value, key = None):
     # For the list and the dict, it assumes they already exist.

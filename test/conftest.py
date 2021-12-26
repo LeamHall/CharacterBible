@@ -6,14 +6,23 @@
 
 import pytest
 from person import Person
+from person.person_builder import PersonBuilder
 
 @pytest.fixture()
 def person():
-  p             = Person()
-  p.first_name  = "Alba"
-  p.last_name   = "Domici"
-  p.gender      = "f"
-  p.physical    = ["Short blond hair", "raging blue eyes", "Scar over right eyebrow."] 
+  p   = Person( first_name = "Alba", last_name = "Domici", gender = "f",
+        physical = ["raging blue eyes"],
+        mental = { "temperament": 'gung-ho' })
   return p 
 
+@pytest.fixture()
+def pb():
+  pb = PersonBuilder()
+  return pb          
+
+@pytest.fixture()
+def person_base():
+  pb = PersonBuilder()
+  person_base = pb.return_person()
+  return person_base
 

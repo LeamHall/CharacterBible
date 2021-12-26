@@ -9,32 +9,32 @@ import pytest
 from person import person
 from view import person as person_view
 
-def test_have_data(person_data):
+def test_have_data(person):
   expected_first_name  = 'Alba'
-  assert person_data.first_name == expected_first_name
+  assert person.first_name == expected_first_name
 
-def test_to_text(person_data):
-  actual_string   = person_view.to_text(person_data)
-  expected_string = "Alba Domici [F] Short blond hair, raging blue eyes. Scar over right eyebrow."
+def test_to_text(person):
+  actual_string   = person_view.to_text(person)
+  expected_string = "Alba Domici [F] raging blue eyes"
   assert actual_string == expected_string
 
-def test_to_html(person_data):
-  actual_string   = person_view.to_html(person_data)
-  expected_string = "<p>Alba Domici [F] Short blond hair, raging blue eyes. Scar over right eyebrow.</p>"
+def test_to_html(person):
+  actual_string   = person_view.to_html(person)
+  expected_string = "<p>Alba Domici [F] raging blue eyes</p>"
   assert actual_string == expected_string
 
-def test_bad_output_type(person_data):
+def test_bad_output_type(person):
   with pytest.raises(ValueError):
-    person_view.char_string(person_data, 'xml')
+    person_view.char_string(person, 'xml')
 
-def test_char_string_text(person_data):
-  actual_string   = person_view.to_text(person_data)
-  expected_string = "Alba Domici [F] Short blond hair, raging blue eyes. Scar over right eyebrow."
+def test_char_string_text(person):
+  actual_string   = person_view.to_text(person)
+  expected_string = "Alba Domici [F] raging blue eyes"
   assert actual_string == expected_string
 
-def test_char_string_html(person_data):
-  actual_string   = person_view.to_html(person_data)
-  expected_string = "<p>Alba Domici [F] Short blond hair, raging blue eyes. Scar over right eyebrow.</p>"
+def test_char_string_html(person):
+  actual_string   = person_view.to_html(person)
+  expected_string = "<p>Alba Domici [F] raging blue eyes</p>"
   assert actual_string == expected_string
 
   

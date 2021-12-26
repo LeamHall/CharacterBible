@@ -38,8 +38,7 @@ def test_set_attr_dict(person):
   mental = getattr(person, 'mental')
   assert mental[k] == expected_attr
 
-@pytest.mark.skip()
-def test_get_attr(self):
-  # Graceful fail if attr not present.
-  # Value if present.
-  pass
+def test_get_attr_fail(person):
+  fail = person.get_attr('kissing habits')
+  assert fail == None
+ 
