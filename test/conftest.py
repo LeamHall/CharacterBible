@@ -7,6 +7,7 @@
 import pytest
 from person import Person
 from person.person_builder import PersonBuilder
+from datamine import datamine
 
 @pytest.fixture()
 def person():
@@ -26,3 +27,7 @@ def person_base():
   person_base = pb.set_data()
   return person_base
 
+@pytest.fixture()
+def dm():
+  dm = datamine.Datamine('data/people.db')
+  return dm
