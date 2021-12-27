@@ -38,7 +38,6 @@ class Datamine:
 
   def select_one_random(self, data):
     self.check_table_given(data)
-    table   = data['table']
     data['random']  = True
     data['limit']   = 1
     result = self.select(data)

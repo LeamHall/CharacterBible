@@ -58,7 +58,7 @@ def test_select_random_like_limit(dm):
  
 def test_select_one_random(dm):
   criteria  = {'table':'plots'}
-  result    = dm.select(criteria)
+  result    = dm.select_one_random(criteria)
   assert    len(result) > 3
   assert    isinstance(result, str) 
 
