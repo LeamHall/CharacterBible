@@ -1,4 +1,4 @@
--- name:    write_people_db.sql
+-- name:    write_people_db_schemas.sql
 -- version: 0.0.1
 -- date:    20211227
 -- author:  Leam Hall
