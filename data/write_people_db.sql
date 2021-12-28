@@ -1,27 +1,29 @@
--- write_people_db.sql
+-- name:    write_people_db.sql
 -- version: 0.0.1
--- date:    20201107
+-- date:    20211227
 -- author:  Leam Hall
--- desc:    Create a sample 2d6 OGL people database.
+-- desc:    Create a sample people-y stuff database.
 
 .headers    on
 .nullvalue  [NULL]
 .echo       on
 
-DROP TABLE IF EXISTS people;
+.read 'data/write_people_table.sql'
 
-CREATE TABLE people (
-  id          INTEGER NOT NULL PRIMARY KEY,
-  last_name   TEXT,
-  first_name  TEXT,
-  middle_name TEXT,
-  suffix_name TEXT,
-  other_name  TEXT,
-  gender      TEXT,
-  birthdate   INTEGER,
-  plot        TEXT,
-  temperament TEXT,
-  notes       TEXT
-);
+.read 'data/write_cultures_table.sql'
+
+.read 'data/write_peopleskills_table.sql'
+
+.read 'data/write_peopleskills_specializations_table.sql'
+
+.read 'data/write_plots_table.sql'
+
+.read 'data/write_political_table.sql'
+
+.read 'data/write_skills_table.sql'
+
+.read 'data/write_specializations_table.sql'
+
+.read 'data/write_temperaments_table.sql'
 
 
