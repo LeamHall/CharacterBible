@@ -4,39 +4,44 @@
 # version:  0.0.1
 # date:     20211228
 # author:   Leam Hall
-# desc:     Pull cadet csv into format for people.db
+# desc:     Pull cadet csv into people db
 
+
+import sqlite3
 
 datafile  = 'data/firster_academy_cadets_1429_update.csv'
-sqlfile   = 'data/add_people_data.sql'
+db        = 'tmp/data/test_people.db'
+con       = sqlite3.connect(db)
+cur       = con.cursor()
 
-with open(sqlfile, 'w') as output:
-  output.write( "-- name:    add_people_data.sql \n")
-  output.write( "-- version: 0.0.1\n")
-  output.write( "-- date:    20211228\n")
-  output.write( "-- author:  Leam Hall\n")
-  output.write( "-- desc:    Populate people stuff database.\n")
-  output.write( "\n")
-  output.write( "BEGIN DEFERRED;\n")
-  output.write( "\n")
+# schema and populate people from csv.
+drop      = """ DROP TABLE IF EXISTS people """
+schema    = """CREATE TABLE people ( id INTEGER NOT NULL PRIMARY KEY,
+              last_name text, first_name text, middle_name text, 
+              suffix_name text, other_name text, gender text, 
+              birthdate integer, plot integer, temperament integer, 
+              notes text )"""
+query     = """INSERT INTO people (last_name, first_name, gender, birthdate, notes ) 
+              VALUES ( :last_name, :first_name, :gender, :birthdate, :notes )"""
 
-  with open(datafile, 'r') as data:
-    for line in data.readlines():
-      line = line.strip()
-      _id, last_name, first_name, gender, upp, b_year, b_day, notes =  line.split(':')
-      birthdate = str(b_year) + str(b_day)
-      birthdate = int(birthdate) 
-      if not notes:
-        notes = 'NULL'
-      formatted = ( f'INSERT INTO people ( last_name, first_name, middle_name, ' 
-        f'suffix_name, other_name, gender, birthdate, plot, temperament, notes) '
-        f'VALUES ( "{last_name}", "{first_name}", NULL, NULL, NULL, '
-        f'"{gender.lower()}", {birthdate}, NULL, NULL, "{notes}" ); '
-        f"\n"
-      )
-      output.write(formatted)
+cur.execute(drop)
+cur.execute(schema)
+con.commit()
 
-  output.write( "\n")
-  output.write("END;\n")
-  output.write( "\n")
+with open(datafile, 'r') as data:
+  for line in data.readlines():
+    line = line.strip()
+    _id, last_name, first_name, gender, upp, b_year, b_day, notes =  line.split(':')
+    birthdate = str(b_year) + str(b_day)
+    birthdate = int(birthdate) 
+    data  = {}
+    data['last_name']   = last_name
+    data['first_name']  = first_name
+    data['gender']      = gender.lower()    
+    data['birthdate']   = birthdate
+    data['notes']       = notes
+    cur.execute(query, data)
+    con.commit()
+
+con.close()
 
