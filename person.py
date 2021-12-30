@@ -32,10 +32,8 @@ def result_to_buildable(result):
   data = {}
   for idx, key in enumerate(data_keys):
     data[key] = result[idx]
-  p = person.Person()
-  P = pb.set_data(p, data)
-  print(P)
-  return P 
+  p = pb.set_data(person.Person(), data)
+  return p 
   
 def show_results(results, output_type = args.output):
   for r in results:

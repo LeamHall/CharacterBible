@@ -13,7 +13,7 @@ class PersonBuilder:
     person.gender     = data.get('gender',      '')
     person.first_name = data.get('first_name',  '')
     person.last_name  = data.get('last_name',   '')
-    person.birth_info = data.get('birth_info',  0)
+    person.birthdate  = data.get('birthdate',   0)
     person.notes      = data.get('notes',       '')
     return person
 
@@ -21,7 +21,7 @@ class PersonBuilder:
     person.gender        = data.get('gender',        self.gen_gender())
     person.first_name    = data.get('first_name',    self.gen_firstname(person.gender))
     person.last_name     = data.get('last_name',     self.gen_lastname())
-    person.birth_info    = data.get('birth_info',    self.gen_birthinfo()) 
+    person.birthdate     = data.get('birthdate',     self.gen_birthdate()) 
     person.notes         = data.get('notes',         '')
     return person
 
@@ -31,8 +31,8 @@ class PersonBuilder:
   def gen_lastname(self):
     return 'Dough'  
 
-  def gen_birthinfo(self):
-    return {'year' : 1234, 'day': 56 }
+  def gen_birthdate(self):
+    return 1234056
 
   def gen_gender(self):
     return 'm'

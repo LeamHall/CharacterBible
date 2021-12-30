@@ -24,19 +24,19 @@ def test_basic_person():
   assert b.first_name   == 'John'
   assert b.last_name    == 'Dough'
   assert b.gender       == 'm'
-  assert b.birth_info   == { 'year': 1234, 'day': 56 }
+  assert b.birthdate    == 1234056
   assert b.notes        == ''
 
 def test_generated_person():
   girl  = Person()
   data  = { 'first_name' : 'Jane', 'last_name' : 'Dont', 'gender' : 'f',
-          'birth_info' : { 'year': 1236, 'day': 56 }, 'notes' : 'calm' }
+          'birthdate' : 1236056, 'notes' : 'calm' }
   pb    = PersonBuilder()
   g     = pb.gen_data(girl, data)
   assert g.first_name     == 'Jane'
   assert g.last_name      == 'Dont'
   assert g.gender         == 'f'
-  assert g.birth_info     == { 'day': 56, 'year': 1236 }
+  assert g.birthdate      == 1236056
   assert g.notes          == 'calm'
 
 def test_existing_person_data():
