@@ -1,5 +1,6 @@
 # TODO List
 
+Full output
 CSV output
 dump option
 configs 
@@ -9,4 +10,6 @@ update option on idx; column and value
 update via csv line
 update notes via file. Notes can be long.
 get column names
+build test_db process
+cleaner sample data
 

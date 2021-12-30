@@ -34,6 +34,7 @@ def result_to_buildable(result):
     data[key] = result[idx]
   p = person.Person()
   P = pb.set_data(p, data)
+  print(P)
   return P 
   
 def show_results(results, output_type = args.output):

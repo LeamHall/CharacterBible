@@ -13,6 +13,11 @@ def test_have_data(person):
   expected_first_name  = 'Alba'
   assert person.first_name == expected_first_name
 
+def test_to_csv(person):
+  actual_string   = person_view.to_csv(person)
+  expected_string = '123|Domici|Alba||f|1416146|||Trail Rat'
+  assert actual_string == expected_string
+
 def test_to_text(person):
   actual_string   = person_view.to_text(person)
   expected_string = "Alba Domici [F]"

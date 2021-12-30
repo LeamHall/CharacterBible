@@ -10,25 +10,26 @@ from person import Person
 from person.person_builder import PersonBuilder
 
 def test_create_basic():
-  b = Person()
+  b   = Person()
   pb  = PersonBuilder()
   p   = pb.gen_data(b)
   assert isinstance(p, Person)
 
 def test_basic_person():
-  boy         = Person()
-  pb          = PersonBuilder()
-  b = pb.gen_data(boy)
+  boy = Person()
+  pb  = PersonBuilder()
+  b   = pb.gen_data(boy)
   assert isinstance(b, Person)
-  assert b.first_name     == 'John'
-  assert b.last_name      == 'Dough'
-  assert b.gender         == 'm'
-  assert b.birth_info     == { 'year': 1234, 'day': 56 }
-  assert b.notes          == ''
+  assert b.idx          == -1
+  assert b.first_name   == 'John'
+  assert b.last_name    == 'Dough'
+  assert b.gender       == 'm'
+  assert b.birth_info   == { 'year': 1234, 'day': 56 }
+  assert b.notes        == ''
 
 def test_generated_person():
   girl  = Person()
-  data  = { 'first_name' : 'Jane', 'last_name' : 'Dont', 'gender' : 'f', 
+  data  = { 'first_name' : 'Jane', 'last_name' : 'Dont', 'gender' : 'f',
           'birth_info' : { 'year': 1236, 'day': 56 }, 'notes' : 'calm' }
   pb    = PersonBuilder()
   g     = pb.gen_data(girl, data)
@@ -40,6 +41,10 @@ def test_generated_person():
 
 def test_existing_person_data():
   girl  = Person()
-  data  = { 'first_name': 'Susie', 'last_name': 'Dont', '_id': 867 }
+  data  = { 'first_name': 'Susie', 'last_name': 'Dont', 'idx': 867 }
   pb    = PersonBuilder()
   g     = pb.set_data(girl, data)
+  assert g.idx        == 867
+  assert g.first_name == 'Susie'
+  assert g.last_name  == 'Dont'
+
