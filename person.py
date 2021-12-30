@@ -40,6 +40,12 @@ def show_results(results, output_type = args.output):
   for r in results:
     P = result_to_buildable(r)
     print(person_view.char_string(P, output_type))
+    if output_type == 'text':
+      print("----")
+    elif output_type == 'html':
+      print("<p></p>")
+    else:
+      print("\n")
 
 if args.idx:
   criteria['idx'] = args.idx
