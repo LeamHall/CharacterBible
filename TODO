@@ -1,0 +1,12 @@
+# TODO List
+
+CSV output
+dump option
+configs 
+  database
+  data directory
+update option on idx; column and value
+update via csv line
+update notes via file. Notes can be long.
+get column names
+
