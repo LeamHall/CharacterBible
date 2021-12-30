@@ -13,8 +13,6 @@ from person import Person
 
 #import person
 
-#  physical:   str = ''
-#  mental:     str = ''
 #  birth_year: int = 0
 #  birth_day:  int = 0
 #  notes:      str = ''

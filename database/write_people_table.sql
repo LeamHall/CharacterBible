@@ -15,12 +15,10 @@
 DROP TABLE IF EXISTS people;
 
 CREATE TABLE people (
-  id          INTEGER NOT NULL PRIMARY KEY,
+  idx         INTEGER NOT NULL PRIMARY KEY,
   last_name   TEXT,
   first_name  TEXT,
   middle_name TEXT,
-  suffix_name TEXT,
-  other_name  TEXT,
   gender      TEXT,
   birthdate   INTEGER,
   plot        INTEGER,

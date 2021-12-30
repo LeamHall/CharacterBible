@@ -10,22 +10,14 @@
 import sqlite3
 
 datafile  = 'data/firster_academy_cadets_1429_update.csv'
-db        = 'tmp/data/test_people.db'
+db        = 'data/people.db'
 con       = sqlite3.connect(db)
 cur       = con.cursor()
 
 # schema and populate people from csv.
-drop      = """ DROP TABLE IF EXISTS people """
-schema    = """CREATE TABLE people ( id INTEGER NOT NULL PRIMARY KEY,
-              last_name text, first_name text, middle_name text, 
-              suffix_name text, other_name text, gender text, 
-              birthdate integer, plot integer, temperament integer, 
-              notes text )"""
 query     = """INSERT INTO people (last_name, first_name, gender, birthdate, notes ) 
               VALUES ( :last_name, :first_name, :gender, :birthdate, :notes )"""
 
-cur.execute(drop)
-cur.execute(schema)
 con.commit()
 
 with open(datafile, 'r') as data:

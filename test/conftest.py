@@ -11,9 +11,7 @@ from datamine import datamine
 
 @pytest.fixture()
 def person():
-  p   = Person( first_name = "Alba", last_name = "Domici", gender = "f",
-        physical = ["raging blue eyes"],
-        mental = { "temperament": 'gung-ho' })
+  p   = Person( first_name = "Alba", last_name = "Domici", gender = "f" )
   return p 
 
 @pytest.fixture()

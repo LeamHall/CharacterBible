@@ -23,8 +23,6 @@ character = builder.return_character()
 print(character.supp_4())
 
 ##
-#  physical:   str = ''
-#  mental:     str = ''
 #  birth_year: int = 0
 #  birth_day:  int = 0
 #  notes:      str = ''

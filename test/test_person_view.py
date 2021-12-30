@@ -15,12 +15,12 @@ def test_have_data(person):
 
 def test_to_text(person):
   actual_string   = person_view.to_text(person)
-  expected_string = "Alba Domici [F] raging blue eyes"
+  expected_string = "Alba Domici [F]"
   assert actual_string == expected_string
 
 def test_to_html(person):
   actual_string   = person_view.to_html(person)
-  expected_string = "<p>Alba Domici [F] raging blue eyes</p>"
+  expected_string = "<p>Alba Domici [F]</p>"
   assert actual_string == expected_string
 
 def test_bad_output_type(person):
@@ -29,12 +29,12 @@ def test_bad_output_type(person):
 
 def test_char_string_text(person):
   actual_string   = person_view.to_text(person)
-  expected_string = "Alba Domici [F] raging blue eyes"
+  expected_string = "Alba Domici [F]"
   assert actual_string == expected_string
 
 def test_char_string_html(person):
   actual_string   = person_view.to_html(person)
-  expected_string = "<p>Alba Domici [F] raging blue eyes</p>"
+  expected_string = "<p>Alba Domici [F]</p>"
   assert actual_string == expected_string
 
   

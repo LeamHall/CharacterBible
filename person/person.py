@@ -13,15 +13,12 @@ from dataclasses import dataclass, field
 class Person:
   """ Base Person object """
 
-  physical:       list  = field(default_factory=list)
-  mental:         dict  = field(default_factory=dict)
   first_name:     str   = ''
   last_name:      str   = ''
   gender:         str   = ''
   birth_info:     dict  = field(default_factory=dict)
   notes:          str   = ''
-  relationships:  dict  = field(default_factory=dict)
-  cultures:       list  = field(default_factory=list)
+  idx:            int   = -1
 
   def set_attr(self, attr, value, key = None):
     # For the list and the dict, it assumes they already exist.

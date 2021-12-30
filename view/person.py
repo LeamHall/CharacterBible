@@ -5,21 +5,13 @@
 # desc:     Formatting data for various output types.
 
 def to_text(data):
-  physical = ''
-  for item in data.physical:
-    physical = item + " " 
-  physical  = physical.strip()
-  string = "{} {} [{}] {}".format(data.first_name, data.last_name,
-    data.gender.upper(), physical)
+  string = "{} {} [{}]".format(data.first_name, data.last_name,
+    data.gender.upper())
   return string
 
 def to_html(data):
-  physical = ''
-  for item in data.physical:
-    physical = item + " " 
-  physical  = physical.strip()
-  string = "<p>{} {} [{}] {}</p>".format(data.first_name, data.last_name,
-    data.gender.upper(), physical)
+  string = "<p>{} {} [{}]</p>".format(data.first_name, data.last_name,
+    data.gender.upper())
   return string
   
 def char_string(data, output_type = 'text'):
