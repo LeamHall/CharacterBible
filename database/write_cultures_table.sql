@@ -11,7 +11,7 @@
 DROP TABLE IF EXISTS cultures;
 
 CREATE TABLE cultures (
-  id        INTEGER NOT NULL PRIMARY KEY,
+  idx        INTEGER NOT NULL PRIMARY KEY,
   culture INTEGER
 );
 

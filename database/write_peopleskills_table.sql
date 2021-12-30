@@ -10,7 +10,7 @@
 DROP TABLE IF EXISTS peopleskills;
 
 CREATE TABLE peopleskills (
-  id        INTEGER NOT NULL PRIMARY KEY,
+  idx        INTEGER NOT NULL PRIMARY KEY,
   people_id INTEGER,
   skill_id  INTEGER,
   level     INTEGER

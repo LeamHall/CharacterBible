@@ -10,7 +10,7 @@
 DROP TABLE IF EXISTS peopleskills_specializations;
 
 CREATE TABLE peopleskills_specializations (
-  id                INTEGER NOT NULL PRIMARY KEY,
+  idx                INTEGER NOT NULL PRIMARY KEY,
   people_id         INTEGER,
   skill_id          INTEGER,
   specialization_id INTEGER,

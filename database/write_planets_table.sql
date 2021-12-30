@@ -11,7 +11,7 @@
 DROP TABLE IF EXISTS planets;
 
 CREATE TABLE planets (
-  id        INTEGER NOT NULL PRIMARY KEY,
+  idx        INTEGER NOT NULL PRIMARY KEY,
   planet    TEXT,
   political INTEGER
 );

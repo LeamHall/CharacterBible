@@ -11,7 +11,7 @@
 DROP TABLE IF EXISTS political;
 
 CREATE TABLE political (
-  id        INTEGER NOT NULL PRIMARY KEY,
+  idx        INTEGER NOT NULL PRIMARY KEY,
   political INTEGER
 );
 

@@ -11,7 +11,7 @@
 DROP TABLE IF EXISTS chars_2d6ogl;
 
 CREATE TABLE chars_2d6ogl (
-  id        INTEGER NOT NULL PRIMARY KEY,
+  idx        INTEGER NOT NULL PRIMARY KEY,
   str       INTEGER,
   dex       INTEGER,
   end       INTEGER,
@@ -19,7 +19,7 @@ CREATE TABLE chars_2d6ogl (
   edu       INTEGER,
   soc       INTEGER,
   psr       INTEGER,
-  people_id INTEGER NOT NULL REFERENCES people( id )
+  people_id INTEGER NOT NULL REFERENCES people( idx )
 );
 
 

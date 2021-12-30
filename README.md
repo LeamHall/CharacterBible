@@ -27,7 +27,10 @@ options:
 
 ## Building the initial dataset
 
-  sqlite3 data/people.db database/write_people_table.sql
+  sqlite3 data/people.db < database/write_people_db_schemas.sql
+
+  sqlite3 data/people.db < database/add_people_db_data.sql
+
   demo/cadet_csv_to_people_data.py
 
 

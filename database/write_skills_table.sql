@@ -11,7 +11,7 @@
 DROP TABLE IF EXISTS skills;
 
 CREATE TABLE skills (
-  id    INTEGER NOT NULL PRIMARY KEY,
+  idx    INTEGER NOT NULL PRIMARY KEY,
   skill TEXT
 );
 

@@ -11,7 +11,7 @@
 DROP TABLE IF EXISTS temperaments;
 
 CREATE TABLE temperaments (
-  id          INTEGER NOT NULL PRIMARY KEY,
+  idx          INTEGER NOT NULL PRIMARY KEY,
   temperament TEXT
 );
 

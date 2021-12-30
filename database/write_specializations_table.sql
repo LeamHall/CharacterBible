@@ -10,6 +10,6 @@
 DROP TABLE IF EXISTS specializations;
 
 CREATE TABLE specializations (
-  id              INTEGER NOT NULL PRIMARY KEY,
+  idx              INTEGER NOT NULL PRIMARY KEY,
   specialization  INTEGER
 );

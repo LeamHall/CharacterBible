@@ -1,0 +1,10 @@
+BEGIN DEFERRED;
+INSERT INTO political (idx, political) VALUES ( 1, 'Star Confederation' );
+INSERT INTO political (idx, political) VALUES ( 2, 'Atrean Conglomerate' );
+INSERT INTO political (idx, political) VALUES ( 3, 'Free Trade League' );
+INSERT INTO political (idx, political) VALUES ( 4, 'Gold Domici' );
+INSERT INTO political (idx, political) VALUES ( 5, 'Red Domici' );
+INSERT INTO political (idx, political) VALUES ( 6, 'Blue Domici' );
+INSERT INTO political (idx, political) VALUES ( 7, 'Firster' );
+INSERT INTO political (idx, political) VALUES ( 8, 'Independant' );
+END;
