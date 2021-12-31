@@ -11,6 +11,7 @@ update via csv line
 update notes via file. Notes can be long.
 get column names
 build test_db process
-cleaner sample data
+cleaner sample data  DONE
 document adding other tables
+document updating SQL files with table updates.
 

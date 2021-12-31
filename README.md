@@ -31,6 +31,7 @@ options:
 
   sqlite3 data/people.db < database/add_people_db_data.sql
 
-  demo/cadet_csv_to_people_data.py
+  demo/add_people_sample.py
+
 
 

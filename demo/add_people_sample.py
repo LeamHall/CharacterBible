@@ -1,15 +1,15 @@
 #!/usr/bin/env python
 
-# name:     cadet_csv_to_people_data.py
+# name:     add_people_sample.py
 # version:  0.0.1
-# date:     20211228
+# date:     20211230
 # author:   Leam Hall
-# desc:     Pull cadet csv into people db
+# desc:     Pull sample people csv into people db
 
 
 import sqlite3
 
-datafile  = 'data/firster_academy_cadets_1429_update.csv'
+datafile  = 'data/sample_people.csv'
 db        = 'data/people.db'
 con       = sqlite3.connect(db)
 cur       = con.cursor()
@@ -23,14 +23,15 @@ con.commit()
 with open(datafile, 'r') as data:
   for line in data.readlines():
     line = line.strip()
-    _id, last_name, first_name, gender, upp, b_year, b_day, notes =  line.split(':')
-    birthdate = str(b_year) + str(b_day)
-    birthdate = int(birthdate) 
+    idx, last_name, first_name, middle_name, gender, birthdate, plot, temperament, notes =  line.split('|')
     data  = {}
     data['last_name']   = last_name
     data['first_name']  = first_name
-    data['gender']      = gender.lower()    
+    data['middle_name'] = middle_name
+    data['gender']      = gender
     data['birthdate']   = birthdate
+    data['plot']        = plot
+    data['temperament'] = temperament
     data['notes']       = notes
     cur.execute(query, data)
     con.commit()
