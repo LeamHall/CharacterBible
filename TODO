@@ -1,16 +1,23 @@
 # TODO List
 
+User Tool
+=========
 Full output
-
-dump option
-get column names option
 update option on idx; column and value
 update option via csv line
 update notes via file option. Notes can be long.
 
+Testing
+=======
 build test_db process
+
+Admin Tool
+==========
+dump option
+get column names option
 document adding other tables
 document updating SQL files with table updates.
+
 
 DONE
 ====

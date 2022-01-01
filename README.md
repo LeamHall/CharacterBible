@@ -26,7 +26,7 @@ options:
   -i IDX, --idx IDX     -i <IDX>
   -l LIKE, --like LIKE  -l 'Lefron'
   -o OUTPUT, --output OUTPUT
-                        -o <text|html>
+                        -o <csv|text|html>
 ```
 
 
