@@ -1,17 +1,20 @@
 # TODO List
 
-Full output
-CSV output  DONE
-dump option
 configs 
   database
   data directory
+
+Full output
+
+dump option
+get column names option
 update option on idx; column and value
-update via csv line
-update notes via file. Notes can be long.
-get column names
+update option via csv line
+update notes via file option. Notes can be long.
+
 build test_db process
-cleaner sample data  DONE
 document adding other tables
 document updating SQL files with table updates.
 
+cleaner sample data  DONE
+CSV output  DONE
