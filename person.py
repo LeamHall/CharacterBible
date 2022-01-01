@@ -1,27 +1,42 @@
 #!/usr/bin/env python
 
 # name:     person.py
-# version:  0.0.1
-# date:     20211229
+# version:  0.0.2
+# date:     20220101
 # author:   Leam Hall
-# desc:     CRUD Person with DB.
+# desc:     Store, view, update, remove Person with SQLite DB.
 
 import argparse
+import os 
 
 from datamine import datamine
 from person import person
 from view import person as person_view
 from person import person_builder
 
-parser    = argparse.ArgumentParser("Create, Review, Update, or Delete a person.")
-parser.add_argument("-i", "--idx", help = "-i <IDX>", type = int)
+config = { 'datadir' : 'data', 'db' : 'people.db' }
+
+parser = argparse.ArgumentParser()
 parser.add_argument("-c", "--column", help = "-c 'last_name'", type = str)
+parser.add_argument("-d", "--db", help = "-d <database>", type = str)
+parser.add_argument("-D", "--datadir", help = '-D <datadir>', type = str)
+parser.add_argument("-i", "--idx", help = "-i <IDX>", type = int)
 parser.add_argument("-l", "--like", help = "-l 'Lefron'", type = str)
 parser.add_argument("-o", "--output", help = "-o <text|html>", type = str, default = 'text')
 args = parser.parse_args()
 
-dm        = datamine.Datamine('data/people.db')
-pb        = person_builder.PersonBuilder()
+if args.datadir:
+  config['datadir'] = args.datadir
+if args.db:
+  config['db'] = args.db
+
+try:
+  database  = os.path.join( config['datadir'], config['db'] )
+  dm        = datamine.Datamine(database)
+  pb        = person_builder.PersonBuilder()
+except Exception as e:
+  print(e)
+  
 
 criteria  = {'table': 'people'}
 

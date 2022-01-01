@@ -41,9 +41,13 @@ class Datamine:
       select_statement += " ORDER BY RANDOM()"
     if limit:
       select_statement += " LIMIT({})".format(int(limit))
-    result = self.cur.execute(select_statement)
-
-    return result.fetchall()
+    
+    try:
+      result = self.cur.execute(select_statement)
+    except sqlite3.OperationalError:
+      raise RuntimeError("table, column, or select issue")
+    else:
+      return result.fetchall()
 
   def select_one_random(self, data):
     self.check_table_given(data)

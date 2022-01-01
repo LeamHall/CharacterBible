@@ -1,9 +1,5 @@
 # TODO List
 
-configs 
-  database
-  data directory
-
 Full output
 
 dump option
@@ -16,5 +12,11 @@ build test_db process
 document adding other tables
 document updating SQL files with table updates.
 
-cleaner sample data  DONE
-CSV output  DONE
+DONE
+====
+cleaner sample data
+CSV output
+configs 
+  database
+  data directory
+
