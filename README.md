@@ -14,21 +14,13 @@ Requires Python 3 and SQLite.
 
 ```
 ./person.py -h
-usage: person.py [-h] [-c COLUMN] [-d DB] [-D DATADIR] [-i IDX] [-l LIKE] [-o OUTPUT]
-
-options:
-  -h, --help            show this help message and exit
-  -c COLUMN, --column COLUMN
-                        -c 'last_name'
-  -d DB, --db DB        -d <database>
-  -D DATADIR, --datadir DATADIR
-                        -D <datadir>
-  -i IDX, --idx IDX     -i <IDX>
-  -l LIKE, --like LIKE  -l 'Lefron'
-  -o OUTPUT, --output OUTPUT
-                        -o <csv|text|html>
 ```
 
+## Admin tool
+
+```
+./cb_admin.py -h
+```
 
 ## Building the initial dataset
 
