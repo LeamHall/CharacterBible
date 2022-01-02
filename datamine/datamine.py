@@ -67,3 +67,27 @@ class Datamine:
     result = self.select(data)
     return result
 
+  def insert(self, data):
+    """ self, dict with table and schema key/value pairs """
+    self.check_table_given(data)
+    table       = data['table']
+    columns     = []
+    values      = []
+    for column, value in data.items():
+      if column == 'table':
+        continue
+      if any(ch.isalpha() for ch in value):
+        value = f"'{value}'"
+      columns.append(column)
+      values.append(value)
+    insert_statement = f"INSERT into {table} ({','.join(columns)}) VALUES ( {','.join(values)} )"
+    try:
+      print(insert_statement)
+      result = self.cur.execute(insert_statement)
+      self.con.commit()
+    except sqlite3.OperationalError:
+      raise RuntimeError("INSERT issue")
+    else:
+      return
+
+    

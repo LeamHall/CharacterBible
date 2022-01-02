@@ -14,12 +14,12 @@ def to_csv(data):
 
 def to_text(data):
   string = "{} {} {} [{}]".format(data.idx, data.first_name, data.last_name,
-    data.gender.upper())
+    data.gender)
   return string
 
 def to_html(data):
   string = "<p>{} {} {} [{}]</p>".format(data.idx, data.first_name, 
-    data.last_name, data.gender.upper())
+    data.last_name, data.gender)
   return string
   
 def char_string(data, output_type = 'text'):

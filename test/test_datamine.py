@@ -51,7 +51,7 @@ def test_select_last_name_like(dm):
   assert    len(result)  == 1
 
 def test_select_random_like_limit(dm):
-  criteria  = {'table':'people', 'columns': 'last_name', 'like_column' : 'last_name', 'like': 'Domici', 'random' : True}
+  criteria  = {'table':'people', 'columns': 'last_name', 'like_column' : 'first_name', 'like': 'Alba', 'random' : True}
   result    = dm.select(criteria)
   assert    result[0]    == ('Domici', )
   assert    len(result)  == 1
@@ -62,8 +62,15 @@ def test_get_by_idx(dm):
   assert    result[0] == (118, 'Lefron', 'Wilbur', None, 'm', 1416075, None, None, 'Gimpy Rat')
 
 def test_get_with_like(dm):
-  criteria  = {'table':'people', 'like_column' : 'last_name', 'like': 'Domici'}
+  criteria  = {'table':'people', 'like_column' : 'first_name', 'like': 'Alba'}
   result    = dm.select(criteria)
   assert    result[0]    == (123, 'Domici', 'Alba', None, 'f', 1416146, None, None, 'Trail Rat')
   assert    len(result)  == 1
+
+def test_insert(dm):
+  criteria  = { 'table':'people', 'last_name':'Domici', 'first_name':'Marco' }
+  criteria2 = { 'table':'people', 'like_column' : 'last_name', 'like': 'Domici'}
+  result    = dm.insert(criteria)
+  result_t  = dm.select(criteria2)
+  assert    result_t[-1][2] == 'Marco'
 
