@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-# name:     person.py
+# name:     character_bible.py
 # version:  0.0.2
 # date:     20220101
 # author:   Leam Hall
@@ -21,7 +21,7 @@ arg_parser.add_argument("-d", "--db", help = "-d <database>", type = str)
 arg_parser.add_argument("-D", "--datadir", help = '-D <datadir>', type = str)
 arg_parser.add_argument("-i", "--idx", help = "-i <IDX>", type = int)
 arg_parser.add_argument("-l", "--like", help = "-l 'Lefron'", type = str)
-arg_parser.add_argument("-o", "--output", help = "-o <text|html>", type = str, default = 'text')
+arg_parser.add_argument("-o", "--output", help = "-o <csv|text|html>", type = str, default = 'text')
 args = arg_parser.parse_args()
 
 config_parser = ConfigParser()

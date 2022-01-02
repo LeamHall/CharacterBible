@@ -13,7 +13,7 @@ Requires Python 3 and SQLite.
 ## Usage
 
 ```
-./person.py -h
+./character_bible.py -h
 ```
 
 ## Admin tool
