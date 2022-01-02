@@ -7,6 +7,7 @@
 # desc:     Store, view, update, remove Person with SQLite DB.
 
 import argparse
+from configparser import ConfigParser
 import os 
 
 from datamine import datamine
@@ -14,17 +15,25 @@ from person import person
 from view import person as person_view
 from person import person_builder
 
-config = { 'datadir' : 'data', 'db' : 'people.db' }
+arg_parser = argparse.ArgumentParser()
+arg_parser.add_argument("-c", "--column", help = "-c 'last_name'", type = str)
+arg_parser.add_argument("-d", "--db", help = "-d <database>", type = str)
+arg_parser.add_argument("-D", "--datadir", help = '-D <datadir>', type = str)
+arg_parser.add_argument("-i", "--idx", help = "-i <IDX>", type = int)
+arg_parser.add_argument("-l", "--like", help = "-l 'Lefron'", type = str)
+arg_parser.add_argument("-o", "--output", help = "-o <text|html>", type = str, default = 'text')
+args = arg_parser.parse_args()
 
-parser = argparse.ArgumentParser()
-parser.add_argument("-c", "--column", help = "-c 'last_name'", type = str)
-parser.add_argument("-d", "--db", help = "-d <database>", type = str)
-parser.add_argument("-D", "--datadir", help = '-D <datadir>', type = str)
-parser.add_argument("-i", "--idx", help = "-i <IDX>", type = int)
-parser.add_argument("-l", "--like", help = "-l 'Lefron'", type = str)
-parser.add_argument("-o", "--output", help = "-o <text|html>", type = str, default = 'text')
-args = parser.parse_args()
+config_parser = ConfigParser()
+config_parser.read('sample.cfg')
+config    = {}
+criteria  = {}
+for name, value in config_parser.items('default'):
+  config[name] = config_parser['default'][name]
 
+criteria['table'] = config['table']
+
+# command line arguments take precedence over config file settings.
 if args.datadir:
   config['datadir'] = args.datadir
 if args.db:
@@ -38,7 +47,6 @@ except Exception as e:
   print(e)
   
 
-criteria  = {'table': 'people'}
 
 def result_to_buildable(result):
   ''' Take a data result and return a person object '''

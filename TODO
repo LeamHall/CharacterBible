@@ -6,6 +6,7 @@ Full output
 update option on idx; column and value
 update option via csv line
 update notes via file option. Notes can be long.
+option for different config file.
 
 Testing
 =======
@@ -26,4 +27,4 @@ CSV output
 configs 
   database
   data directory
-
+  parsable
