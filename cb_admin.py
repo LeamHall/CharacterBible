@@ -18,6 +18,7 @@ from person import person_builder
 arg_parser = argparse.ArgumentParser()
 arg_parser.add_argument("-b", "--backup", help = "-b", action='store_true')
 arg_parser.add_argument("-i", "--input", help = "-i <line|of|csv||data>", type = str)
+arg_parser.add_argument("-k", "--keys", help = "-k <table>", type = str)
 args = arg_parser.parse_args()
 
 today = date.today().strftime('%Y%m%d')
@@ -46,6 +47,11 @@ if args.backup:
     con.backup(bck, pages=0)
   bck.close()
   con.close()
+elif args.keys:
+  data                  = {}
+  data['table']         = args.keys
+  keys                  = ', '.join(dm.keys(data))
+  print(keys)
 elif args.input:
   input_list            = args.input.split('|')
   data                  = {}

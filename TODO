@@ -13,7 +13,6 @@ build test_db process
 
 Admin Tool
 ==========
-get column names option
 document adding other tables
 document updating SQL files with table updates.
 
@@ -28,3 +27,4 @@ configs
   parsable
 dump option
 update option via csv line
+get column names option

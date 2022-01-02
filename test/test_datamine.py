@@ -74,3 +74,14 @@ def test_insert(dm):
   result_t  = dm.select(criteria2)
   assert    result_t[-1][2] == 'Marco'
 
+def test_keys_people(dm):
+  criteria  = { 'table':'people' }
+  result    = dm.keys(criteria)
+  assert result == ['idx', 'last_name', 'first_name', 'middle_name', 'gender', 'birthdate', 'plot', 'temperament', 'notes']
+
+
+def test_keys_plots(dm):
+  criteria  = { 'table':'plots' }
+  result    = dm.keys(criteria)
+  assert result == ['idx', 'plot']
+

@@ -82,7 +82,6 @@ class Datamine:
       values.append(value)
     insert_statement = f"INSERT into {table} ({','.join(columns)}) VALUES ( {','.join(values)} )"
     try:
-      print(insert_statement)
       result = self.cur.execute(insert_statement)
       self.con.commit()
     except sqlite3.OperationalError:
@@ -90,4 +89,24 @@ class Datamine:
     else:
       return
 
-    
+  def dict_factory(self, cursor, row):
+      d = {}
+      for idx, col in enumerate(self.cur.description):
+        d[col[0]] = row[idx]
+      return d
+
+  def keys(self, data):
+    self.check_table_given(data)
+    try:
+      table   = data['table']
+      self.con.row_factory = self.dict_factory
+      self.cur = self.con.cursor()
+      self.cur.execute(f"SELECT * from {table}")
+      k       = self.cur.fetchone().keys()
+    except sqlite3.OperationalError:
+      raise RuntimeError("Keys issue")
+    else:
+      return list(k)
+
+
+   
