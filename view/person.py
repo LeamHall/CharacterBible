@@ -4,6 +4,22 @@
 # author:   Leam Hall
 # desc:     Formatting data for various output types.
 
+def make_name(data):
+  name = ''
+  if data.first_name:
+    name += data.first_name + ' '
+  if data.middle_name:
+    name += data.middle_name + ' '
+  if data.last_name:
+    name += data.last_name
+  return name.strip()
+ 
+def make_gender(data): 
+  if data.gender:
+    return data.gender.upper()
+  else:
+    return ''
+
 def to_csv(data):
   string = (
     f"{data.idx}|{data.last_name}|{data.first_name}|{data.middle_name}|"
@@ -13,13 +29,27 @@ def to_csv(data):
   return string
 
 def to_text(data):
-  string = "{} {} {} [{}]".format(data.idx, data.first_name, data.last_name,
-    data.gender)
+  name    = make_name(data)
+  gender  = make_gender(data)
+  string  = (
+    f"{data.idx} {name} [{gender}]\n"
+    f"Birthdate: {data.birthdate}\n"
+    f"Plot: {data.plot}\n"
+    f"Temperament: {data.temperament}\n"
+    f"Notes: {data.notes}\n" 
+  )
   return string
 
 def to_html(data):
-  string = "<p>{} {} {} [{}]</p>".format(data.idx, data.first_name, 
-    data.last_name, data.gender)
+  name    = make_name(data)
+  gender  = make_gender(data)
+  string  = (
+    f"<p>{data.idx} {name} [{gender}]</p>\n"
+    f"<p>Birthdate: {data.birthdate}</p>\n"
+    f"<p>Plot: {data.plot}</p>\n"
+    f"<p>Temperament: {data.temperament}</p>\n"
+    f"<p>Notes: {data.notes}</p>\n"
+  )
   return string
   
 def char_string(data, output_type = 'text'):

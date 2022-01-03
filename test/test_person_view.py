@@ -19,28 +19,60 @@ def test_to_csv(person):
   assert actual_string == expected_string
 
 def test_to_text(person):
-  actual_string   = person_view.to_text(person)
-  expected_string = "123 Alba Domici [f]"
-  assert actual_string == expected_string
+  actual_string   = person_view.to_text(person).split("\n")
+  expected_string_1 = "123 Alba Domici [F]"
+  expected_string_2 = "Birthdate: 1416146"
+  expected_string_3 = "Plot: "
+  expected_string_4 = "Temperament: "
+  expected_string_5 = "Notes: Trail Rat"
+  assert actual_string[0] == expected_string_1
+  assert actual_string[1] == expected_string_2
+  assert actual_string[2] == expected_string_3
+  assert actual_string[3] == expected_string_4
+  assert actual_string[4] == expected_string_5
 
 def test_to_html(person):
-  actual_string   = person_view.to_html(person)
-  expected_string = "<p>123 Alba Domici [f]</p>"
-  assert actual_string == expected_string
+  actual_string   = person_view.to_html(person).split("\n")
+  expected_string_1 = "<p>123 Alba Domici [F]</p>"
+  expected_string_2 = "<p>Birthdate: 1416146</p>"
+  expected_string_3 = "<p>Plot: </p>"
+  expected_string_4 = "<p>Temperament: </p>"
+  expected_string_5 = "<p>Notes: Trail Rat</p>"
+  assert actual_string[0] == expected_string_1
+  assert actual_string[1] == expected_string_2
+  assert actual_string[2] == expected_string_3
+  assert actual_string[3] == expected_string_4
+  assert actual_string[4] == expected_string_5
 
 def test_bad_output_type(person):
   with pytest.raises(ValueError):
     person_view.char_string(person, 'xml')
 
 def test_char_string_text(person):
-  actual_string   = person_view.char_string(person, 'text')
-  expected_string = "123 Alba Domici [f]"
-  assert actual_string == expected_string
+  actual_string   = person_view.to_text(person).split("\n")
+  expected_string_1 = "123 Alba Domici [F]"
+  expected_string_2 = "Birthdate: 1416146"
+  expected_string_3 = "Plot: "
+  expected_string_4 = "Temperament: "
+  expected_string_5 = "Notes: Trail Rat"
+  assert actual_string[0] == expected_string_1
+  assert actual_string[1] == expected_string_2
+  assert actual_string[2] == expected_string_3
+  assert actual_string[3] == expected_string_4
+  assert actual_string[4] == expected_string_5
 
 def test_char_string_html(person):
-  actual_string   = person_view.char_string(person, 'html')
-  expected_string = "<p>123 Alba Domici [f]</p>"
-  assert actual_string == expected_string
+  actual_string   = person_view.to_html(person).split("\n")
+  expected_string_1 = "<p>123 Alba Domici [F]</p>"
+  expected_string_2 = "<p>Birthdate: 1416146</p>"
+  expected_string_3 = "<p>Plot: </p>"
+  expected_string_4 = "<p>Temperament: </p>"
+  expected_string_5 = "<p>Notes: Trail Rat</p>"
+  assert actual_string[0] == expected_string_1
+  assert actual_string[1] == expected_string_2
+  assert actual_string[2] == expected_string_3
+  assert actual_string[3] == expected_string_4
+  assert actual_string[4] == expected_string_5
 
 def test_char_string_csv(person): 
   actual_string   = person_view.char_string(person, 'csv')
