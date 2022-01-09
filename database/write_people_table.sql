@@ -8,9 +8,6 @@
 --   20201121 Changed plot and temperament to INTEGER, 
 --     for their own tables.
 
-.headers    on
-.nullvalue  [NULL]
-.echo       on
 
 DROP TABLE IF EXISTS people;
 

@@ -4,8 +4,6 @@
 -- author:  Leam Hall
 -- desc:    Create a matrix of skill specilizations to people, skills.
 
-.headers    on
-.nullvalue  [NULL]
 
 DROP TABLE IF EXISTS peopleskills_specializations;
 

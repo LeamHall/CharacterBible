@@ -4,9 +4,6 @@
 -- author:    Leam Hall
 -- desc:      Add 2d6 OGL character data table to a database.
 
-.headers    on
-.nullvalue  [NULL]
-.echo       on
 
 DROP TABLE IF EXISTS chars_2d6ogl;
 

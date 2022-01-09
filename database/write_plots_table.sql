@@ -4,9 +4,6 @@
 -- author:  Leam Hall
 -- desc:    Create a sample plots table.
 
-.headers    on
-.nullvalue  [NULL]
-.echo       on
 
 DROP TABLE IF EXISTS plots;
 

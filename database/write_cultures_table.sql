@@ -4,9 +4,6 @@
 -- author:  Leam Hall
 -- desc:    Create a sample cultural background table.
 
-.headers    on
-.nullvalue  [NULL]
-.echo       on
 
 DROP TABLE IF EXISTS cultures;
 

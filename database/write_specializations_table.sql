@@ -4,8 +4,6 @@
 -- author:  Leam Hall
 -- desc:    Create a list of specializations.
 
-.headers    on
-.nullvalue  [NULL]
 
 DROP TABLE IF EXISTS specializations;
 
