@@ -5,15 +5,22 @@ User Tool
 update option on idx; column and value
 update notes via file option. Notes can be long.
 option for different config file.
+integrate plot string into output (txt, html, csv)
+integrate temperament string into output (txt, html, csv)
 
 Testing
 =======
-build test_db process
+Return to unittest (Low)
 
 Admin Tool
 ==========
 document adding other tables
 document updating SQL files with table updates.
+input via csv file
+specify delimiter for csv line
+specify delimiter for csv file
+specify table for csv line
+specify table for csv file
 
 
 DONE
@@ -28,3 +35,4 @@ dump option
 update option via csv line
 get column names option
 Full output
+build test_db process
