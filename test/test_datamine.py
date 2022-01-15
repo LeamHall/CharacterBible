@@ -59,7 +59,7 @@ def test_select_random_like_limit(dm):
 def test_get_by_idx(dm):
   criteria  = {'table': 'people', 'idx':118 }
   result    = dm.get_by_idx(criteria)
-  assert    result[0] == (118, 'Lefron', 'Wilbur', None, 'm', 1416075, None, None, 'Gimpy Rat')
+  assert    result[0] == (118, 'Lefron', 'Wilbur', None, 'm', 1416075, 22, None, 'Gimpy Rat')
 
 def test_get_with_like(dm):
   criteria  = {'table':'people', 'like_column' : 'first_name', 'like': 'Alba'}
@@ -92,5 +92,11 @@ def test_remove_by_idx(dm):
   idx             = result_t[-1][0]
   delete_criteria = { 'table': 'people', 'idx': idx }
   result          = dm.remove_by_idx(delete_criteria)
+  assert result   == 1
+
+def test_update_by_idx_column(dm):
+  update_criteria = {'table':'people', 'idx':118, 'column':'plot', 'value':22}
+  result          = dm.update_by_idx_column(update_criteria)
+  print(result)
   assert result   == 1
 

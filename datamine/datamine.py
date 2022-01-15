@@ -74,6 +74,19 @@ class Datamine:
     #else:
     return result 
 
+  def update_by_idx_column(self, data):
+    self.cur = self.con.cursor()
+    self.check_table_given(data)
+    table   = data['table']
+    idx     = data['idx']
+    column  = data['column']
+    value   = data['value']
+    update_statement = f"UPDATE {table} SET {column}={value} WHERE idx = {idx}"
+    result  = self.cur.execute(update_statement).rowcount
+    self.con.commit()
+    self.cur.close()
+    return result 
+
   def get_by_idx(self, data):
     self.check_table_given(data)
     result = self.select(data)

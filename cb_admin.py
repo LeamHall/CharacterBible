@@ -29,13 +29,23 @@ def csv_to_dict(data, line, sep='|'):
     updated[key] = value
   return updated
 
+def kv_to_dict(data, line):
+  """ Breaks a key=value string into key and value """
+  updated = copy.deepcopy(data)
+  key, value = line.split('=')
+  updated['column'] = key
+  updated['value']  = value
+  return updated
+
 ###
 arg_parser = argparse.ArgumentParser()
 arg_parser.add_argument("-b", "--backup", help = "-b", action = 'store_true')
 arg_parser.add_argument("-i", "--input", help = "-i <line|of|csv||data>", type = str)
+arg_parser.add_argument("-I", "--idx", type = int)
 arg_parser.add_argument("-k", "--keys", action = 'store_true')
 arg_parser.add_argument("-r", "--remove", type = int)
 arg_parser.add_argument("-t", "--table", type = str)
+arg_parser.add_argument("-u", "--update", help = "<column>=<value>", type = str)
 args = arg_parser.parse_args()
 
 today = date.today().strftime('%Y%m%d')
@@ -79,6 +89,12 @@ elif args.input:
   data['table']         = args.table
   data = csv_to_dict(data, args.input)
   dm.insert(data)
+elif args.update:
+  data                  = {}
+  data['table']         = args.table
+  data['idx']           = args.idx
+  data = kv_to_dict(data, args.update)
+  dm.update_by_idx_column(data)
   
   
 
