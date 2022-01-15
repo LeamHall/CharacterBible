@@ -10,7 +10,7 @@ import sqlite3
 class Datamine:
   def __init__(self, file):
     self.con = sqlite3.connect(file)
-    self.cur = self.con.cursor()
+    #self.cur = self.con.cursor()
   
   def dict_factory(cursor, row):
     d = {}
@@ -24,6 +24,7 @@ class Datamine:
 
   def select(self, data):
     self.check_table_given(data)
+    self.cur    = self.con.cursor()
     table       = data['table']
     columns     = data.get('columns', '*')
     idx         = data.get('idx', None)
@@ -48,6 +49,8 @@ class Datamine:
       raise RuntimeError("table, column, or select issue")
     else:
       return result.fetchall()
+    finally:
+      self.cur.close()
 
   def select_one_random(self, data):
     self.check_table_given(data)
@@ -57,17 +60,19 @@ class Datamine:
     return str(result[0][1])
 
   def remove_by_idx(self, data):
+    self.cur = self.con.cursor()
     self.check_table_given(data)
     table   = data['table']
     idx     = data['idx']
     delete_statement = f"DELETE FROM {table} WHERE idx = {idx}"
-    try:
-      result = self.cur.execute(delete_statement).rowcount
-      self.con.commit()
-    except sqlite3.OperationalError:
-      raise RuntimeError("issue in remove_by_idx")
-    else:
-      return result 
+    #try:
+    result = self.cur.execute(delete_statement).rowcount
+    self.con.commit()
+    self.cur.close()
+    #except sqlite3.OperationalError:
+    #  raise RuntimeError("issue in remove_by_idx")
+    #else:
+    return result 
 
   def get_by_idx(self, data):
     self.check_table_given(data)
@@ -82,6 +87,7 @@ class Datamine:
   def insert(self, data):
     """ self, dict with table and schema key/value pairs """
     self.check_table_given(data)
+    self.cur = self.con.cursor()
     table       = data['table']
     columns     = []
     values      = []
@@ -93,35 +99,38 @@ class Datamine:
       columns.append(column)
       values.append(value)
     insert_statement = f"INSERT into {table} ({','.join(columns)}) VALUES ( {','.join(values)} )"
-    try:
-      result = self.cur.execute(insert_statement)
-      # Having this in locks the database. 
-      # No answer on #python, asking on SQLite forum.
-      #self.con.commit()
-    except sqlite3.OperationalError:
-      raise RuntimeError("INSERT issue")
-    except Exception as e:
-      print(e)
-    else:
-      return
-
+    #try:
+    result = self.cur.execute(insert_statement)
+    self.con.commit()
+    self.cur.close()
+    #except sqlite3.OperationalError:
+    #  raise RuntimeError("INSERT issue")
+    #except Exception as e:
+    #  print(e)
+    #else:
+    #  return
+    return result
+    
   def dict_factory(self, cursor, row):
-      d = {}
-      for idx, col in enumerate(self.cur.description):
-        d[col[0]] = row[idx]
-      return d
+    d = {}
+    for idx, col in enumerate(self.cur.description):
+      d[col[0]] = row[idx]
+    return d
 
   def keys(self, data):
     self.check_table_given(data)
+    self.cur = self.con.cursor()
     try:
-      table   = data['table']
+      table     = data['table']
       self.con.row_factory = self.dict_factory
-      self.cur = self.con.cursor()
+      self.cur  = self.con.cursor()
       self.cur.execute(f"SELECT * from {table}")
-      k       = self.cur.fetchone().keys()
+      k         = self.cur.fetchone().keys()
     except sqlite3.OperationalError:
       raise RuntimeError("Keys issue")
     else:
       return list(k)
+    finally:
+      self.cur.close()
 
    
