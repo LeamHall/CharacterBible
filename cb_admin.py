@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 
 # name:     cb_admin.py
-# version:  0.0.1
-# date:     20220102
+# version:  0.0.2
+# date:     20220115
 # author:   Leam Hall
 # desc:     Administrative functions for the CharacterBible
 
@@ -12,13 +12,29 @@ from datetime import date
 import os
 import sqlite3
 
+import copy
+
 from datamine import datamine
 from person import person_builder
 
+###
+def csv_to_dict(data, line, sep='|'):
+  """ Breaks a CSV line into key, value pairs, returns dict of d[k] = v 
+      Sample line:
+      "last_name=Domici|first_name=Al|middle_name=Ester|gender=f"
+  """
+  updated = copy.deepcopy(data)  
+  for phrase in line.split(sep):
+    key, value = phrase.split("=")
+    updated[key] = value
+  return updated
+
+###
 arg_parser = argparse.ArgumentParser()
-arg_parser.add_argument("-b", "--backup", help = "-b", action='store_true')
+arg_parser.add_argument("-b", "--backup", help = "-b", action = 'store_true')
 arg_parser.add_argument("-i", "--input", help = "-i <line|of|csv||data>", type = str)
-arg_parser.add_argument("-k", "--keys", help = "-k <table>", type = str)
+arg_parser.add_argument("-k", "--keys", action = 'store_true')
+arg_parser.add_argument("-t", "--table", type = str)
 args = arg_parser.parse_args()
 
 today = date.today().strftime('%Y%m%d')
@@ -49,21 +65,13 @@ if args.backup:
   con.close()
 elif args.keys:
   data                  = {}
-  data['table']         = args.keys
+  data['table']         = args.table
   keys                  = ', '.join(dm.keys(data))
   print(keys)
 elif args.input:
-  input_list            = args.input.split('|')
   data                  = {}
-  data['table']         = 'people'
-  data['last_name']     = input_list[0] or 'NULL'
-  data['first_name']    = input_list[1] or 'NULL' 
-  data['middle_name']   = input_list[2] or 'NULL'
-  data['gender']        = input_list[3] or 'NULL'
-  data['birthdate']     = input_list[4] or 'NULL'
-  data['plot']          = input_list[5] or 'NULL'
-  data['temperament']   = input_list[6] or 'NULL'
-  data['notes']         = input_list[7] or 'NULL'
+  data['table']         = args.table
+  data = csv_to_dict(data, args.input)
   dm.insert(data)
   
   

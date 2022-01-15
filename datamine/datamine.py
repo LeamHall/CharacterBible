@@ -86,6 +86,8 @@ class Datamine:
       self.con.commit()
     except sqlite3.OperationalError:
       raise RuntimeError("INSERT issue")
+    except Exception as e:
+      print(e)
     else:
       return
 
