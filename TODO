@@ -18,7 +18,6 @@ document updating SQL files with table updates.
 input via csv file
 specify delimiter for csv file
 specify table for csv file
-delete by idx, table
 
 DONE
 ====
@@ -37,3 +36,4 @@ integrate plot string into output (txt, html, csv)
 integrate temperament string into output (txt, html, csv)
 specify table for csv line
 specify delimiter for csv line
+delete by idx, table
