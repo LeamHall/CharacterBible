@@ -34,6 +34,7 @@ arg_parser = argparse.ArgumentParser()
 arg_parser.add_argument("-b", "--backup", help = "-b", action = 'store_true')
 arg_parser.add_argument("-i", "--input", help = "-i <line|of|csv||data>", type = str)
 arg_parser.add_argument("-k", "--keys", action = 'store_true')
+arg_parser.add_argument("-r", "--remove", type = int)
 arg_parser.add_argument("-t", "--table", type = str)
 args = arg_parser.parse_args()
 
@@ -68,6 +69,11 @@ elif args.keys:
   data['table']         = args.table
   keys                  = ', '.join(dm.keys(data))
   print(keys)
+elif args.remove:
+  data                  = {}
+  data['table']         = args.table
+  data['idx']           = args.remove
+  dm.remove_by_idx(data)
 elif args.input:
   data                  = {}
   data['table']         = args.table

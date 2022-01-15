@@ -79,9 +79,18 @@ def test_keys_people(dm):
   result    = dm.keys(criteria)
   assert result == ['idx', 'last_name', 'first_name', 'middle_name', 'gender', 'birthdate', 'plot', 'temperament', 'notes']
 
-
 def test_keys_plots(dm):
   criteria  = { 'table':'plots' }
   result    = dm.keys(criteria)
   assert result == ['idx', 'plot']
+
+def test_remove_by_idx(dm):
+  insert_criteria = {'table':'people', 'last_name':'Domici', 'first_name':'Marco'}
+  insert_result   = dm.insert(insert_criteria)
+  select_criteria = { 'table':'people', 'like_column' : 'last_name', 'like': 'Domici'}
+  result_t        = dm.select(select_criteria)
+  idx             = result_t[-1][0]
+  delete_criteria = { 'table': 'people', 'idx': idx }
+  result          = dm.remove_by_idx(delete_criteria)
+  assert result   == 1
 

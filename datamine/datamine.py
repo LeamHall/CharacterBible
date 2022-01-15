@@ -56,6 +56,18 @@ class Datamine:
     result = self.select(data)
     return str(result[0][1])
 
+  def remove_by_idx(self, data):
+    self.check_table_given(data)
+    table   = data['table']
+    idx     = data['idx']
+    delete_statement = f"DELETE FROM {table} WHERE idx = {idx}"
+    try:
+      result = self.cur.execute(delete_statement).rowcount
+      self.con.commit()
+    except sqlite3.OperationalError:
+      raise RuntimeError("issue in remove_by_idx")
+    else:
+      return result 
 
   def get_by_idx(self, data):
     self.check_table_given(data)
@@ -83,7 +95,9 @@ class Datamine:
     insert_statement = f"INSERT into {table} ({','.join(columns)}) VALUES ( {','.join(values)} )"
     try:
       result = self.cur.execute(insert_statement)
-      self.con.commit()
+      # Having this in locks the database. 
+      # No answer on #python, asking on SQLite forum.
+      #self.con.commit()
     except sqlite3.OperationalError:
       raise RuntimeError("INSERT issue")
     except Exception as e:
@@ -109,6 +123,5 @@ class Datamine:
       raise RuntimeError("Keys issue")
     else:
       return list(k)
-
 
    
