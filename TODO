@@ -9,6 +9,7 @@ option for different config file.
 Testing
 =======
 Return to unittest (Low)
+tests use test db
 
 Admin Tool
 ==========
@@ -19,7 +20,7 @@ specify delimiter for csv line
 specify delimiter for csv file
 specify table for csv line
 specify table for csv file
-
+delete by idx, table
 
 DONE
 ====
