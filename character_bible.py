@@ -16,12 +16,13 @@ from view import person as person_view
 from person import person_builder
 
 arg_parser = argparse.ArgumentParser()
-arg_parser.add_argument("-c", "--column", help = "-c 'last_name'", type = str)
-arg_parser.add_argument("-d", "--db", help = "-d <database>", type = str)
-arg_parser.add_argument("-D", "--datadir", help = '-D <datadir>', type = str)
-arg_parser.add_argument("-i", "--idx", help = "-i <IDX>", type = int)
-arg_parser.add_argument("-l", "--like", help = "-l 'Lefron'", type = str)
-arg_parser.add_argument("-o", "--output", help = "-o <csv|text|html>", type = str, default = 'text')
+arg_parser.add_argument("-c", "--column", type = str)
+arg_parser.add_argument("-d", "--db", type = str)
+arg_parser.add_argument("-D", "--datadir", type = str)
+arg_parser.add_argument("-i", "--idx", type = int)
+arg_parser.add_argument("-l", "--like", type = str)
+arg_parser.add_argument("-o", "--output", help = "<csv|text|html>", 
+  type = str, default = 'text')
 args = arg_parser.parse_args()
 
 config_parser = ConfigParser()
@@ -47,6 +48,10 @@ except Exception as e:
   print(e)
   
 
+def get_single_value(idx, table):
+  criteria  = { 'idx': idx, 'table': table }
+  result    = dm.get_by_idx(criteria)
+  return    result[0][1]
 
 def result_to_buildable(result):
   ''' Take a data result and return a person object '''
@@ -55,6 +60,10 @@ def result_to_buildable(result):
   data = {}
   for idx, key in enumerate(data_keys):
     data[key] = result[idx]
+  if data['plot']:
+    data['plot']  = get_single_value(data['plot'], 'plots')
+  if data['temperament']:
+    data['temperament'] = get_single_value(data['temperament'], 'temperaments')
   p = pb.set_data(person.Person(), data)
   return p 
   

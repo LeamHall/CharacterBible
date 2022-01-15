@@ -64,7 +64,7 @@ def test_get_by_idx(dm):
 def test_get_with_like(dm):
   criteria  = {'table':'people', 'like_column' : 'first_name', 'like': 'Alba'}
   result    = dm.select(criteria)
-  assert    result[0]    == (123, 'Domici', 'Alba', None, 'f', 1416146, None, None, 'Trail Rat')
+  assert    result[0]    == (123, 'Domici', 'Alba', None, 'f', 1416146, 22, 9, 'Trail Rat')
   assert    len(result)  == 1
 
 def test_insert(dm):

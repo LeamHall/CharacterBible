@@ -9,12 +9,14 @@ from person import Person
 class PersonBuilder:
 
   def set_data(self, person, data = {}):
-    person.idx        = data.get('idx',         -1)
-    person.gender     = data.get('gender',      '')
-    person.first_name = data.get('first_name',  '')
-    person.last_name  = data.get('last_name',   '')
-    person.birthdate  = data.get('birthdate',   0)
-    person.notes      = data.get('notes',       '')
+    person.idx          = data.get('idx',         -1)
+    person.gender       = data.get('gender',      '')
+    person.first_name   = data.get('first_name',  '')
+    person.last_name    = data.get('last_name',   '')
+    person.birthdate    = data.get('birthdate',    0)
+    person.plot         = data.get('plot',        '')
+    person.temperament  = data.get('temperament', '')
+    person.notes        = data.get('notes',       '')
     return person
 
   def gen_data(self, person, data = {}):
