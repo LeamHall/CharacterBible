@@ -4,19 +4,34 @@
 # author:   Leam Hall
 # desc:     Interface to data sources.
 
-
+import os
 import sqlite3
 
 class Datamine:
   def __init__(self, file):
     self.con = sqlite3.connect(file)
-    #self.cur = self.con.cursor()
   
   def dict_factory(cursor, row):
     d = {}
     for idx, col in enumerate(self.cur.description):
       d[col[0]] = row[idx]
     return d
+
+  def build_test_db(self, file):
+    all_files = os.listdir('database')
+    for file in all_files:
+      if file.startswith("write_"):
+        filename = os.path.join('database', file)
+        with open(filename, 'r') as f:
+          sqlcmd = f.read()
+          self.con.executescript(sqlcmd)
+    for file in all_files:
+      if file.startswith("test_add_"):
+        filename = os.path.join('database', file)
+        with open(filename, 'r') as f:
+          sqlcmd = f.read()
+          self.con.executescript(sqlcmd) 
+    return 
   
   def check_table_given(self, data): 
     if not data['table']:

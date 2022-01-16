@@ -14,8 +14,7 @@ def test_datamine(dm):
 def test_basic_connect(dm):
   criteria  = {'table':'people'}
   result    = dm.select(criteria)  
-  assert    len(result) > 100
-  assert    len(result) < 200
+  assert    len(result) == 1
 
 def test_table_missing(dm):
   criteria  = {}
@@ -45,27 +44,27 @@ def test_select_multicolumn_with_limit_string(dm):
   assert    len(result)  == 1
 
 def test_select_last_name_like(dm):
-  criteria  = {'table':'people', 'columns': 'idx, first_name, last_name', 'limit' : '1', 'like_column' : 'last_name', 'like': 'Domici'}
+  criteria  = {'table':'people', 'columns': 'idx, first_name, last_name', 'limit' : '1', 'like_column' : 'last_name', 'like': 'Romero'}
   result    = dm.select(criteria)
-  assert    result[0]    == (123, 'Alba', 'Domici' )
+  assert    result[0]    == (1, 'Cecil', 'Romero' )
   assert    len(result)  == 1
 
 def test_select_random_like_limit(dm):
-  criteria  = {'table':'people', 'columns': 'last_name', 'like_column' : 'first_name', 'like': 'Alba', 'random' : True}
+  criteria  = {'table':'people', 'columns': 'last_name', 'like_column' : 'first_name', 'like': 'Cecil', 'random' : True}
   result    = dm.select(criteria)
-  assert    result[0]    == ('Domici', )
+  assert    result[0]    == ('Romero', )
   assert    len(result)  == 1
 
 def test_get_by_idx(dm):
-  criteria  = {'table': 'people', 'idx':118 }
+  criteria  = {'table': 'people', 'idx':1 }
   result    = dm.get_by_idx(criteria)
-  assert    result[0] == (118, 'Lefron', 'Wilbur', None, 'm', 1416075, 22, None, 'Gimpy Rat')
+  assert    result[0] == (1, 'Romero', 'Cecil', None, 'm', 1413242, None, None, '')
 
 def test_get_with_like(dm):
-  criteria  = {'table':'people', 'like_column' : 'first_name', 'like': 'Alba'}
+  criteria  = {'table':'people', 'like_column' : 'first_name', 'like': 'Cecil'}
   result    = dm.select(criteria)
-  assert    result[0]    == (123, 'Domici', 'Alba', None, 'f', 1416146, 22, 9, 'Trail Rat')
-  assert    len(result)  == 1
+  assert    result[0]   == (1, 'Romero', 'Cecil', None, 'm', 1413242, None, None, '')
+  assert    len(result) == 1
 
 def test_insert(dm):
   criteria  = { 'table':'people', 'last_name':'Domici', 'first_name':'Marco' }
@@ -95,8 +94,7 @@ def test_remove_by_idx(dm):
   assert result   == 1
 
 def test_update_by_idx_column(dm):
-  update_criteria = {'table':'people', 'idx':118, 'column':'plot', 'value':22}
+  update_criteria = {'table':'people', 'idx':1, 'column':'plot', 'value':22}
   result          = dm.update_by_idx_column(update_criteria)
-  print(result)
   assert result   == 1
 

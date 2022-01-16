@@ -28,5 +28,7 @@ def person_base():
 
 @pytest.fixture()
 def dm():
-  dm = datamine.Datamine('data/people.db')
+  #dm = datamine.Datamine('data/people.db')
+  dm = datamine.Datamine(":memory:")
+  dm.build_test_db(":memory:")
   return dm
