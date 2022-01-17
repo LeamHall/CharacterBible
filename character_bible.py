@@ -15,30 +15,29 @@ from person import person
 from view import person as person_view
 from person import person_builder
 
+defaults  = { 'config':'sample.cfg', 'section':'default'}
 arg_parser = argparse.ArgumentParser()
 arg_parser.add_argument("-c", "--column", type = str)
+arg_parser.add_argument("-C", "--config", type = str, default = "sample.cfg")
 arg_parser.add_argument("-d", "--db", type = str)
 arg_parser.add_argument("-D", "--datadir", type = str)
 arg_parser.add_argument("-i", "--idx", type = int)
 arg_parser.add_argument("-l", "--like", type = str)
 arg_parser.add_argument("-o", "--output", help = "<csv|text|html>", 
   type = str, default = 'text')
+arg_parser.add_argument("-S", "--section", type = str, default = 'default')
 args = arg_parser.parse_args()
 
 config_parser = ConfigParser()
-config_parser.read('sample.cfg')
+config_parser.read(args.config)
 config    = {}
 criteria  = {}
-for name, value in config_parser.items('default'):
-  config[name] = config_parser['default'][name]
+for name, value in config_parser.items(args.section):
+  config[name] = config_parser[args.section][name]
 
-criteria['table'] = config['table']
-
-# command line arguments take precedence over config file settings.
-if args.datadir:
-  config['datadir'] = args.datadir
-if args.db:
-  config['db'] = args.db
+defaults.update(config)
+defaults.update(vars(args))
+criteria['table'] = defaults['table']
 
 try:
   database  = os.path.join( config['datadir'], config['db'] )

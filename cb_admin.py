@@ -38,23 +38,32 @@ def kv_to_dict(data, line):
   return updated
 
 ###
+
+defaults  = { 'section': 'default', 'config': 'sample.cfg' }
 arg_parser = argparse.ArgumentParser()
 arg_parser.add_argument("-b", "--backup", help = "-b", action = 'store_true')
+arg_parser.add_argument("-C", "--config", type = str, default = 'sample.cfg')
 arg_parser.add_argument("-i", "--input", help = "-i <line|of|csv||data>", type = str)
 arg_parser.add_argument("-I", "--idx", type = int)
 arg_parser.add_argument("-k", "--keys", action = 'store_true')
 arg_parser.add_argument("-r", "--remove", type = int)
-arg_parser.add_argument("-t", "--table", type = str)
+arg_parser.add_argument("-S", "--section", type = str, default = 'default')
+#arg_parser.add_argument("-t", "--table", type = str)
 arg_parser.add_argument("-u", "--update", help = "<column>=<value>", type = str)
 args = arg_parser.parse_args()
 
 today = date.today().strftime('%Y%m%d')
 config_parser = ConfigParser()
-config_parser.read('sample.cfg')
+config_parser.read(args.config)
 config = {}
-section = 'default'
+section = args.section
 for name, value in config_parser.items(section):
   config[name] = config_parser[section][name]
+
+defaults.update(config)
+defaults.update(vars(args))
+print(defaults)
+os._exit(1)
 
 try:
   database  = os.path.join( config['datadir'], config['db'] )
@@ -76,7 +85,7 @@ if args.backup:
   con.close()
 elif args.keys:
   data                  = {}
-  data['table']         = args.table
+  data['table']         = defaults[table]
   keys                  = ', '.join(dm.keys(data))
   print(keys)
 elif args.remove:
