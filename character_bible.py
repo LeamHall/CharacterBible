@@ -9,6 +9,7 @@
 import argparse
 from configparser import ConfigParser
 import os 
+import copy
 
 from datamine import datamine
 from person import person
@@ -35,18 +36,7 @@ criteria  = {}
 for name, value in config_parser.items(args.section):
   config[name] = config_parser[args.section][name]
 
-defaults.update(config)
-defaults.update(vars(args))
-criteria['table'] = defaults['table']
-
-try:
-  database  = os.path.join( config['datadir'], config['db'] )
-  dm        = datamine.Datamine(database)
-  pb        = person_builder.PersonBuilder()
-except Exception as e:
-  print(e)
-  
-
+###
 def get_single_value(idx, table):
   criteria  = { 'idx': idx, 'table': table }
   result    = dm.get_by_idx(criteria)
@@ -66,7 +56,7 @@ def result_to_buildable(result):
   p = pb.set_data(person.Person(), data)
   return p 
   
-def show_results(results, output_type = args.output):
+def show_results(results, output_type):
   for r in results:
     P = result_to_buildable(r)
     print(person_view.char_string(P, output_type))
@@ -77,6 +67,31 @@ def show_results(results, output_type = args.output):
     else:
       print("\n")
 
+def sort_args(defaults, config, args):
+  """ Returns dict of configuration, with defaults lowest priority, 
+      then config file options, then CLI args as highest. 
+  """
+  defaults = copy.deepcopy(defaults)
+  defaults.update(config)
+  for key, value in vars(args).items():
+    if value is not None:
+      defaults[key] = value
+  return defaults
+
+###
+defaults = sort_args(defaults, config, args)
+
+criteria['table'] = defaults['table']
+
+
+try:
+  database  = os.path.join( defaults['datadir'], defaults['db'] )
+  dm        = datamine.Datamine(database)
+  pb        = person_builder.PersonBuilder()
+except Exception as e:
+  print(e)
+  
+
 if args.idx:
   criteria['idx'] = args.idx
   results = dm.get_by_idx(criteria)
@@ -85,8 +100,9 @@ elif args.column and args.like:
   criteria['like_column']  = args.column
   criteria['like']         = args.like
   results = dm.get_with_like(criteria)
-  show_results(results, output_type = args.output)
+  show_results(results, output_type = defaults['output'])
 else:
   results = dm.select(criteria)
   show_results(results, output_type = args.output)
+
 
