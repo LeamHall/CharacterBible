@@ -37,6 +37,17 @@ def kv_to_dict(data, line):
   updated['value']  = value
   return updated
 
+def sort_args(defaults, config, args):
+  """ Returns dict of configuration, with defaults lowest priority, 
+      then config file options, then CLI args as highest. 
+  """
+  defaults = copy.deepcopy(defaults)
+  defaults.update(config)
+  for key, value in vars(args).items():
+    if value is not None:
+      defaults[key] = value
+  return defaults
+
 ###
 
 defaults  = { 'section': 'default', 'config': 'sample.cfg' }
@@ -48,7 +59,7 @@ arg_parser.add_argument("-I", "--idx", type = int)
 arg_parser.add_argument("-k", "--keys", action = 'store_true')
 arg_parser.add_argument("-r", "--remove", type = int)
 arg_parser.add_argument("-S", "--section", type = str, default = 'default')
-#arg_parser.add_argument("-t", "--table", type = str)
+arg_parser.add_argument("-t", "--table", type = str)
 arg_parser.add_argument("-u", "--update", help = "<column>=<value>", type = str)
 args = arg_parser.parse_args()
 
@@ -60,13 +71,10 @@ section = args.section
 for name, value in config_parser.items(section):
   config[name] = config_parser[section][name]
 
-defaults.update(config)
-defaults.update(vars(args))
-print(defaults)
-os._exit(1)
+defaults = sort_args(defaults, config, args)
 
 try:
-  database  = os.path.join( config['datadir'], config['db'] )
+  database  = os.path.join( defaults['datadir'], defaults['db'] )
   dm        = datamine.Datamine(database)
   pb        = person_builder.PersonBuilder()
 except Exception as e:
@@ -75,7 +83,7 @@ except Exception as e:
 
 if args.backup:
   backup_database_name = f"backup_{today}_{config['db']}"
-  backup_database = os.path.join( config['datadir'], backup_database_name )
+  backup_database = os.path.join( defaults['datadir'], backup_database_name )
 
   con = sqlite3.connect(database)
   bck = sqlite3.connect(backup_database)
@@ -85,23 +93,23 @@ if args.backup:
   con.close()
 elif args.keys:
   data                  = {}
-  data['table']         = defaults[table]
+  data['table']         = defaults['table']
   keys                  = ', '.join(dm.keys(data))
   print(keys)
 elif args.remove:
   data                  = {}
-  data['table']         = args.table
+  data['table']         = defaults['table']
   data['idx']           = args.remove
   dm.remove_by_idx(data)
 elif args.input:
   data                  = {}
-  data['table']         = args.table
+  data['table']         = defaults['table']
   data = csv_to_dict(data, args.input)
   dm.insert(data)
 elif args.update:
   data                  = {}
-  data['table']         = args.table
-  data['idx']           = args.idx
+  data['table']         = defaults['table']
+  data['idx']           = defaults['idx']
   data = kv_to_dict(data, args.update)
   dm.update_by_idx_column(data)
   
