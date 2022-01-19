@@ -22,7 +22,7 @@ arg_parser.add_argument("-c", "--column", type = str)
 arg_parser.add_argument("-C", "--config", type = str, default = "sample.cfg")
 arg_parser.add_argument("-d", "--db", type = str)
 arg_parser.add_argument("-D", "--datadir", type = str)
-arg_parser.add_argument("-i", "--idx", type = int)
+arg_parser.add_argument("-I", "--idx", type = int)
 arg_parser.add_argument("-l", "--like", type = str)
 arg_parser.add_argument("-o", "--output", help = "<csv|text|html>", 
   type = str, default = 'text')
@@ -80,9 +80,7 @@ def sort_args(defaults, config, args):
 
 ###
 defaults = sort_args(defaults, config, args)
-
 criteria['table'] = defaults['table']
-
 
 try:
   database  = os.path.join( defaults['datadir'], defaults['db'] )
@@ -91,7 +89,6 @@ try:
 except Exception as e:
   print(e)
   
-
 if args.idx:
   criteria['idx'] = args.idx
   results = dm.get_by_idx(criteria)
@@ -100,9 +97,9 @@ elif args.column and args.like:
   criteria['like_column']  = args.column
   criteria['like']         = args.like
   results = dm.get_with_like(criteria)
-  show_results(results, output_type = defaults['output'])
+  show_results(results, defaults['output'])
 else:
   results = dm.select(criteria)
-  show_results(results, output_type = args.output)
+  show_results(results, args.output)
 
 

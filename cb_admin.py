@@ -52,15 +52,15 @@ def sort_args(defaults, config, args):
 
 defaults  = { 'section': 'default', 'config': 'sample.cfg' }
 arg_parser = argparse.ArgumentParser()
-arg_parser.add_argument("-b", "--backup", help = "-b", action = 'store_true')
-arg_parser.add_argument("-C", "--config", type = str, default = 'sample.cfg')
-arg_parser.add_argument("-i", "--input", help = "-i <line|of|csv||data>", type = str)
+arg_parser.add_argument("-b", "--backup", action = 'store_true')
+arg_parser.add_argument("-C", "--config", default = 'sample.cfg')
+arg_parser.add_argument("-i", "--input", help = "-i <last_name=Smith|first_name=Janie>")
 arg_parser.add_argument("-I", "--idx", type = int)
 arg_parser.add_argument("-k", "--keys", action = 'store_true')
 arg_parser.add_argument("-r", "--remove", type = int)
-arg_parser.add_argument("-S", "--section", type = str, default = 'default')
-arg_parser.add_argument("-t", "--table", type = str)
-arg_parser.add_argument("-u", "--update", help = "<column>=<value>", type = str)
+arg_parser.add_argument("-S", "--section", default = 'default')
+arg_parser.add_argument("-t", "--table")
+arg_parser.add_argument("-u", "--update", help = "<column>=<value>")
 args = arg_parser.parse_args()
 
 today = date.today().strftime('%Y%m%d')

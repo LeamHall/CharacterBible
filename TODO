@@ -2,22 +2,24 @@
 
 User Tool
 =========
-option for different config file.
+bug: calling a missing DB creates an empty DB
+document: different uses, and which options to use
 
 Code Quality
 ============
-return to unittest (Low)
-tests use test db
-check out pylint
+support: return to unittest (Low)
+support: tests use test db
+support: check out pylint
+support: better exception handling
 
 Admin Tool
 ==========
-document adding other tables
-document updating SQL files with table updates.
-input via csv file
-specify delimiter for csv file
-specify table for csv file
-update notes via file option. Notes can be long.
+document: adding other tables
+document: updating SQL files with table updates
+feature: input via csv file
+feature: specify delimiter for csv file
+feadure: specify table for csv file
+feature: update notes via file option since notes can be long
 
 DONE
 ====
@@ -38,3 +40,4 @@ specify table for csv line
 specify delimiter for csv line
 delete by idx, table
 update option on idx; column and value
+option for different config file.

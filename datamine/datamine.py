@@ -96,7 +96,7 @@ class Datamine:
     idx     = data['idx']
     column  = data['column']
     value   = data['value']
-    update_statement = f"UPDATE {table} SET {column}={value} WHERE idx = {idx}"
+    update_statement = f"UPDATE {table} SET {column} = '{value}' WHERE idx = {idx}"
     result  = self.cur.execute(update_statement).rowcount
     self.con.commit()
     self.cur.close()
