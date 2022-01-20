@@ -2,8 +2,9 @@
 
 User Tool
 =========
-bug: calling a missing DB creates an empty DB
+bug:      calling a missing DB creates an empty DB
 document: different uses, and which options to use
+feature:  option to get random result from a specified table
 
 Code Quality
 ============
@@ -11,15 +12,16 @@ support: return to unittest (Low)
 support: tests use test db
 support: check out pylint
 support: better exception handling
+support: put cb/cb_admin defs into munger
 
 Admin Tool
 ==========
 document: adding other tables
 document: updating SQL files with table updates
-feature: input via csv file
-feature: specify delimiter for csv file
-feadure: specify table for csv file
-feature: update notes via file option since notes can be long
+feature:  input via csv file
+feature:  specify delimiter for csv file
+feature:  specify table for csv file
+feature:  update notes via file option since notes can be long
 
 DONE
 ====
