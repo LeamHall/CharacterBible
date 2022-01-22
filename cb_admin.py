@@ -8,11 +8,11 @@
 
 import argparse
 from configparser import ConfigParser
+import copy
 from datetime import date
 import os
 import sqlite3
-
-import copy
+import sys
 
 from datamine import datamine
 from person import person_builder
@@ -75,10 +75,13 @@ defaults = sort_args(defaults, config, args)
 
 try:
   database  = os.path.join( defaults['datadir'], defaults['db'] )
+  if not os.path.exists(database):
+    raise FileNotFoundError
   dm        = datamine.Datamine(database)
   pb        = person_builder.PersonBuilder()
-except Exception as e:
-  print(e)
+except FileNotFoundError:
+  print(f"Database {database} does not exist")
+  sys.exit()
 
 
 if args.backup:

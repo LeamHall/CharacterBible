@@ -8,8 +8,9 @@
 
 import argparse
 from configparser import ConfigParser
-import os 
 import copy
+import os 
+import sys
 
 from datamine import datamine
 from person import person
@@ -84,8 +85,13 @@ criteria['table'] = defaults['table']
 
 try:
   database  = os.path.join( defaults['datadir'], defaults['db'] )
+  if not os.path.exists(database):
+    raise FileNotFoundError
   dm        = datamine.Datamine(database)
   pb        = person_builder.PersonBuilder()
+except FileNotFoundError:
+  print(f"Database file {database} does not exist.")
+  sys.exit()
 except Exception as e:
   print(e)
   
