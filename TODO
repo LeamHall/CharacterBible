@@ -2,7 +2,6 @@
 
 User Tool
 =========
-bug:      calling a missing DB creates an empty DB
 document: different uses, and which options to use
 feature:  option to get random result from a specified table
 
@@ -43,3 +42,4 @@ specify delimiter for csv line
 delete by idx, table
 update option on idx; column and value
 option for different config file.
+bug:      calling a missing DB creates an empty DB
