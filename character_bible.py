@@ -17,12 +17,12 @@ from person import person
 from view import person as person_view
 from person import person_builder
 
-defaults  = { 'config':'sample.cfg', 'section':'default'}
+defaults  = { 'config':'sample.cfg', 'section':'default', 'table':'people'}
 arg_parser = argparse.ArgumentParser()
 arg_parser.add_argument("-c", "--column", type = str)
 arg_parser.add_argument("-C", "--config", type = str, default = "sample.cfg")
-arg_parser.add_argument("-d", "--db", type = str)
-arg_parser.add_argument("-D", "--datadir", type = str)
+arg_parser.add_argument("-d", "--db", type = str, default = "people.db")
+arg_parser.add_argument("-D", "--datadir", type = str, default = "data")
 arg_parser.add_argument("-I", "--idx", type = int)
 arg_parser.add_argument("-l", "--like", type = str)
 arg_parser.add_argument("-o", "--output", help = "<csv|text|html>", 
@@ -30,12 +30,13 @@ arg_parser.add_argument("-o", "--output", help = "<csv|text|html>",
 arg_parser.add_argument("-S", "--section", type = str, default = 'default')
 args = arg_parser.parse_args()
 
-config_parser = ConfigParser()
-config_parser.read(args.config)
-config    = {}
 criteria  = {}
-for name, value in config_parser.items(args.section):
-  config[name] = config_parser[args.section][name]
+config    = {}
+if os.path.exists(args.config):
+  config_parser = ConfigParser()
+  config_parser.read(args.config)
+  for name, value in config_parser.items(args.section):
+    config[name] = config_parser[args.section][name]
 
 ###
 def get_single_value(idx, table):

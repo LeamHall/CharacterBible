@@ -43,3 +43,4 @@ delete by idx, table
 update option on idx; column and value
 option for different config file.
 bug:      calling a missing DB creates an empty DB
+bug:      remove requirement for a config file
