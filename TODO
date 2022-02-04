@@ -25,7 +25,6 @@ feature:  update notes via file option since notes can be long
 
 Containerization
 ================
-support:  makefile for container relocation
 
 
 Database
@@ -59,3 +58,4 @@ bug:      calling a missing DB creates an empty DB
 bug:      remove requirement for a config file
 document: build and use container
 document: use docker volume for database location
+support:  makefile for container relocation
