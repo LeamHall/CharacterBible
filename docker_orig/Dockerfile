@@ -11,4 +11,4 @@ COPY docker/main.py .
 COPY docker/app .
 
 EXPOSE 8000
-CMD [ "uvicorn", "main:app", "--host", "0.0.0.0" ]
+CMD [ "uvicorn", "main:app", "--host", "0.0.0.0", "--reload" ]
