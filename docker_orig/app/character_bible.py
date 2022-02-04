@@ -85,13 +85,16 @@ defaults = sort_args(defaults, config, args)
 criteria['table'] = defaults['table']
 
 try:
-  database  = os.path.join( defaults['datadir'], defaults['db'] )
+  database  = os.path.join( ".", defaults['datadir'], defaults['db'] )
+  #database = "data/people.db"
   if not os.path.exists(database):
     raise FileNotFoundError
   dm        = datamine.Datamine(database)
   pb        = person_builder.PersonBuilder()
 except FileNotFoundError:
   print(f"Database file {database} does not exist.")
+  print(f"{os.listdir()} base directory contents.")
+  print(f"{os.listdir(defaults['datadir'])} directory contents")
   sys.exit()
 except Exception as e:
   print(e)
