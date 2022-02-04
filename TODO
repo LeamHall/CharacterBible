@@ -1,5 +1,6 @@
 # TODO List
 
+
 User Tool
 =========
 document: different uses, and which options to use
@@ -21,6 +22,17 @@ feature:  input via csv file
 feature:  specify delimiter for csv file
 feature:  specify table for csv file
 feature:  update notes via file option since notes can be long
+
+Containerization
+================
+document: use docker volume for database location
+
+Database
+========
+document: foriegn key support (sqlite)
+support:  sample database for extended attributes
+support:  clean out planned but unused data
+
 
 DONE
 ====
@@ -44,3 +56,4 @@ update option on idx; column and value
 option for different config file.
 bug:      calling a missing DB creates an empty DB
 bug:      remove requirement for a config file
+document: build and use container
