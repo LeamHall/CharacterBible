@@ -34,5 +34,10 @@ class TestCharacterBuilder(unittest.TestCase):
       self.assertGreaterEqual(self.character.stats[s], 2)
       self.assertLessEqual(self.character.stats[s], 12)
 
+  def test_set_extras(self):
+    extra_data = { 'rank':'CPT', 'service':'Dragon' }
+    self.character.set_extras(extra_data)
+    self.assertEqual(self.character.extras['rank'], 'CPT')
+    self.assertEqual(self.character.extras['service'], 'Dragon')
 
-
+ 

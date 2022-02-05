@@ -61,9 +61,10 @@ class Character(Person):
   'Al Lefron [F] 66A66C'
 
   """
-  skills:     dict = field(default_factory=dict)
-  stats:      dict = field(default_factory=dict)
-  upp:        str = None
+  stats:      dict  = field(default_factory=dict)
+  skills:     dict  = field(default_factory=dict)
+  extras:     dict  = field(default_factory=dict)
+  upp:        str   = None
 
   def gen_upp(self):
     ''' Specific to 2d6 Traveller type games'''
@@ -75,7 +76,10 @@ class Character(Person):
     self.upp = upp_s
 
   def get_stat(self, stat_name, form = 'int'):
-    s = self.stats[stat_name]
+    try:
+      s = self.stats[stat_name]
+    except KeyError:
+      return None
     if form == 'hex':
       ''' Specific to 2d6 Traveller type games'''
       s = format(s, 'X')
@@ -83,6 +87,9 @@ class Character(Person):
 
   def set_stats(self, stat_data):
     self.stats = stat_data
+
+  def set_extras(self, extra_data):
+    self.extras = extra_data
 
   def get_skill(self, skill_name):
     if skill_name in self.skills:

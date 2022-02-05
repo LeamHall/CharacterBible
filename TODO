@@ -5,6 +5,7 @@ User Tool
 =========
 document: different uses, and which options to use
 feature:  option to get random result from a specified table
+feature:  use Jinja2 templates for html output
 
 Code Quality
 ============

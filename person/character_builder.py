@@ -9,9 +9,6 @@
 import random
 from person import Character
 from person import Person
-#from character import Character
-
-#import person
 
 #  birth_year: int = 0
 #  birth_day:  int = 0

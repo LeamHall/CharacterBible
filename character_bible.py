@@ -86,7 +86,6 @@ criteria['table'] = defaults['table']
 
 try:
   database  = os.path.join( ".", defaults['datadir'], defaults['db'] )
-  #database = "data/people.db"
   if not os.path.exists(database):
     raise FileNotFoundError
   dm        = datamine.Datamine(database)
