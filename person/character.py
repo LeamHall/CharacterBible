@@ -11,56 +11,7 @@ from person import Person
 
 @dataclass
 class Character(Person):
-  """
-  Note that these tests hit more than just Character specific attributes and
-  methods. This is intentional.
-
-  >>> al = Character()
-
-  ''' Existing attributes '''
-  >>> al.first_name = "Al"
-  >>> al.first_name
-  'Al'
-
-  >>> al.set_attr('gender', 'F')
-  >>> al.get_attr('gender')
-  'F'
-
-  >>> al.set_attr('last_name', "Lefron")
-  >>> al.first_name + ' ' + al.last_name
-  'Al Lefron'
-
-  ''' Unspecified attributes '''
-  >>> al.set_attr('zaniness', 'high')
-  >>> al.get_attr('zaniness')
-  'high'
-  >>> al.get_attr('social grace') is None
-  True
-
-  ''' Stats '''
-  >>> stat_data = {'str': 6, 'dex': 6, 'end': 10, 'int': 6, 'edu': 6, 'soc': 12 }
-  >>> al.set_stats(stat_data) 
-  >>> al.gen_upp()
-  >>> al.upp
-  '66A66C'
-
-  >>> al.get_stat('soc', 'hex')
-  'C'
-  >>> al.get_stat('soc')
-  12
-
-  ''' Skills '''
-  >>> al.modify_skill('blade', 2)
-  >>> al.get_skill('blade')
-  2
-  >>> al.get_skill('kissing') is None
-  True
-
-  ''' Supp 4 Output '''
-  >>> al.supp_4()
-  'Al Lefron [F] 66A66C'
-
-  """
+  
   stats:      dict  = field(default_factory=dict)
   skills:     dict  = field(default_factory=dict)
   extras:     dict  = field(default_factory=dict)
@@ -89,7 +40,10 @@ class Character(Person):
     self.stats = stat_data
 
   def set_extras(self, extra_data):
-    self.extras = extra_data
+    if self.extras:
+      self.extras |= extra_data
+    else:
+      self.extras = extra_data
 
   def get_skill(self, skill_name):
     if skill_name in self.skills:
@@ -104,12 +58,13 @@ class Character(Person):
       self.skills[skill_name] = value
 
   def supp_4(self):
-    output_string = "{} {} [{}] {}".format(
-      self.first_name, self.last_name, self.gender, self.upp)
+    skill_list = []
+    for skill in self.skills.keys():
+      s = f"{skill}-{self.get_skill(skill)}"
+      skill_list.append(s)
+    skill_list.sort()
+    skill_str = ", ".join(skill_list)
+    output_string = ( f"{self.first_name} {self.last_name} [{self.gender.upper()}] {self.upp}",
+      f"{skill_str}" )
     return output_string
 
-
-if __name__ == "__main__":
-  import doctest
-  doctest.testmod()
- 
