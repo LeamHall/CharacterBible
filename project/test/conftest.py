@@ -5,9 +5,9 @@
 # desc:     Shared data for tests.
 
 import pytest
-from person import Person
-from person.person_builder import PersonBuilder
-from datamine import datamine
+from app.person import Person
+from app.person.person_builder import PersonBuilder
+from app.datamine import datamine
 
 @pytest.fixture()
 def person():

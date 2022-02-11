@@ -7,7 +7,7 @@
 # desc:     Testing Base Person object.
 
 import pytest
-from person import Person
+from app.person import Person
 
 def test_creation(person):
   assert isinstance(person, Person)

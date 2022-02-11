@@ -10,14 +10,14 @@ Containers
 
 
 2.  Edit Dockerfile. (see sample provided) 
-2.1   Update docker/requirements.txt as needed
+2.1   Update project/requirements.txt as needed
 
 3.  Create and populate the volume
-3.1   The directory ~/docker/data is the current volume.
+3.1   The directory ~/project/data is the current volume.
 3.2   See the database.txt file for installing a sample database.
 
 4.  Build and run the Docker image.
-4.1   docker build -t characterbible -f docker/Dockerfile .
-4.2   docker run -it --rm -p 8000:8000 -v $(pwd)/docker/data:/data --name characterbible characterbible
+4.1   docker build -t characterbible -f project/Dockerfile .
+4.2   docker run -it --rm -p 8000:8000 -v $(pwd)/project/data:/data --name characterbible characterbible
 
   

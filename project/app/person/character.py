@@ -7,7 +7,7 @@
 # desc:     Object for 2d6 OGL Sci-Fi games.
 
 from dataclasses import dataclass, field
-from person import Person
+from .person import Person
 
 @dataclass
 class Character(Person):

@@ -6,8 +6,8 @@
 
 import pytest
 
-from person import Person
-from person.person_builder import PersonBuilder
+from app.person import Person
+from app.person.person_builder import PersonBuilder
 
 def test_create_basic():
   b   = Person()

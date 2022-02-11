@@ -6,8 +6,8 @@
 
 import pytest
 
-from person import person
-from view import person as person_view
+from app.person import person
+from app.view import person as person_view
 
 def test_have_data(person):
   expected_first_name  = 'Alba'

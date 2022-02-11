@@ -9,11 +9,13 @@ feature:  use Jinja2 templates for html output
 
 Code Quality
 ============
-support: return to unittest (Low)
-support: tests use test db
-support: check out pylint
-support: better exception handling
-support: put cb/cb_admin defs into munger
+support:  return to unittest (Low)
+support:  tests use test db
+support:  check out pylint
+support:  better exception handling
+support:  put cb/cb_admin defs into munger
+support:  move to pytest
+
 
 Admin Tool
 ==========
@@ -24,16 +26,18 @@ feature:  specify delimiter for csv file
 feature:  specify table for csv file
 feature:  update notes via file option since notes can be long
 
+
 Containerization
 ================
-
+          
 
 Database
 ========
 document: foriegn key support (sqlite)
 support:  sample database for extended attributes
 support:  clean out planned but unused data
-
+support:  put db into Repository with just "get" and "set".
+          - See "Architecture Patterns with Python"
 
 DONE
 ====
@@ -60,3 +64,5 @@ bug:      remove requirement for a config file
 document: build and use container
 document: use docker volume for database location
 support:  makefile for container relocation
+support:  move from docker/* to project/*
+support:  make tests use project/*

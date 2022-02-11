@@ -8,9 +8,9 @@
 
 import unittest
 
-from person import Person
-from person import Character
-from person import CharacterBuilder
+from app.person import Person
+from app.person import Character
+from app.person import CharacterBuilder
 
 class TestCharacterBuilder(unittest.TestCase):
   def setUp(self):

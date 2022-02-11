@@ -4,7 +4,7 @@
 # author:   Leam Hall
 # desc:     Build a person.
 
-from person import Person
+from .person import Person
 
 class PersonBuilder:
 

@@ -6,7 +6,7 @@
 
 import pytest
 
-from datamine import datamine
+from app.datamine import datamine
 
 def test_datamine(dm):
   assert isinstance(dm, datamine.Datamine)

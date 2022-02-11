@@ -7,8 +7,8 @@
 # desc:     Testing 2d6 OGL Character object
 
 import unittest
-from person import Person
-from person import Character
+from app.person import Person
+from app.person import Character
 
 class TestCharacter(unittest.TestCase):
 
