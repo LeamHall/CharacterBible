@@ -91,5 +91,5 @@ def test_set_stats(character):
 
 def test_supp_4(character):
   character.gen_upp()
-  expected = ("Al Lefron [F] 78A67C", "GunCbt(CbtR)-2, Kissing-2, Math-0")
+  expected = ("Alba Domici [F] 78A67C", "GunCbt(CbtR)-2, Kissing-2, Math-0")
   assert(character.supp_4() == expected)

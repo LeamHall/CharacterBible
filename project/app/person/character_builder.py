@@ -9,6 +9,7 @@
 import random
 from .character import Character
 from .person import Person
+from .person_builder import PersonBuilder
 
 #  birth_year: int = 0
 #  birth_day:  int = 0
@@ -17,12 +18,18 @@ from .person import Person
 class CharacterBuilder:
  
   def __init__(self, data = {}):
-    self.character = Character()
+    self.set_person(data)
+    self.set_character(data)
     self.set_stats(data)
-    self.set_data(data)
     self.character.gen_upp()
     self.return_character()
     
+  def set_person(self, data):
+    self.person = data.get('person', self.gen_person())
+
+  def set_character(self, data):
+    data['person'] = data.get('person', Person())
+    self.character = Character(**data)    
 
   def set_stats(self, data):
     stats = data.get('stats', {})
@@ -30,24 +37,15 @@ class CharacterBuilder:
     for stat in ['str', 'dex', 'end', 'int', 'edu', 'soc']:
       stat_data[stat] = stats.get(stat, self.roll_2d6())
     self.character.set_stats(stat_data)
-      
 
   def roll_2d6(self):
     return random.randint(1,6) + random.randint(1,6)
- 
-  def set_data(self, data):
-    self.character.gender     = data.get('gender', self.gen_gender())
-    self.character.first_name = data.get('first_name', self.gen_first_name(self.character.gender))
-    self.character.last_name  = data.get('last_name', self.gen_last_name())
-
-  def gen_gender(self):
-    return 'M'
-
-  def gen_first_name(self, gender):
-    return 'Fred'
-
-  def gen_last_name(self):
-    return 'Smith'
+      
+  def gen_person(self):
+    person  = Person()
+    pb      = PersonBuilder()
+    p       = pb.gen_data(person)
+    return p
 
   def return_character(self):
     return self.character

@@ -12,7 +12,6 @@ feature:  front page with NGINX
 
 Code Quality
 ============
-support:  tests use test db
 support:  check out pylint
 support:  put cb/cb_admin defs into munger
 
@@ -34,7 +33,6 @@ support:  move to Repository model(get, set)
 
 Data
 ====
-refactor: use dataclass and composition
 refactor: better exception handling
           
 
@@ -75,3 +73,5 @@ support:  makefile for container relocation
 support:  move from docker/* to project/*
 support:  make tests use project/*
 refactor: move to pytest
+support:  tests use test db
+refactor: use dataclass and composition

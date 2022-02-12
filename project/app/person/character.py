@@ -10,13 +10,25 @@ from dataclasses import dataclass, field
 from .person import Person
 
 @dataclass
-class Character(Person):
-  
+class Character():
+  person:     Person
   stats:      dict  = field(default_factory=dict)
   skills:     dict  = field(default_factory=dict)
   extras:     dict  = field(default_factory=dict)
   upp:        str   = None
 
+  def __post_init__(self):
+    self.first_name   = self.person.first_name
+    self.last_name    = self.person.last_name
+    self.first_name   = self.person.first_name
+    self.middle_name  = self.person.middle_name
+    self.gender       = self.person.gender
+    self.birthdate    = self.person.birthdate
+    self.plot         = self.person.plot
+    self.temperament  = self.person.temperament
+    self.notes        = self.person.notes
+
+  
   def gen_upp(self):
     ''' Specific to 2d6 Traveller type games'''
     upp_s = ''

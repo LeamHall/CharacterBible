@@ -42,24 +42,33 @@ def person():
 
 @pytest.fixture()
 def character():
-  stats  = { 'str': 7, 'dex': 8, 'end':10, 'int':6, 'edu':7, 'soc': 12 } 
-  skills = { "GunCbt(CbtR)": 2, "Math": 0, "Kissing": 2 }
-  data   = { 'first_name': 'Al', 'last_name': 'Lefron', 'gender': 'f', 
-      'stats': stats, 'skills':skills }
-  c   = Character(**data)
+  p       = Person( idx = 123, first_name = "Alba", last_name = "Domici", 
+            birthdate = 1416146, gender = "f",  notes = 'Trail Rat')
+  stats   = { 'str': 7, 'dex': 8, 'end':10, 'int':6, 'edu':7, 'soc': 12 } 
+  skills  = { "GunCbt(CbtR)": 2, "Math": 0, "Kissing": 2 }
+  data    = { 'person':p, 'stats': stats, 'skills':skills }
+  c       = Character(**data)
   return c
 
 @pytest.fixture()
 def amanda():
-  stats = {'soc': 12} 
-  data  = {'first_name': 'Amanda', 'last_name': 'Lefron', 'gender': 'F', 'stats' : stats}
+  p       = Person( first_name = "Amanda", last_name = "Lefron", 
+            birthdate = 1432150, gender = "f")
+  stats   = { 'str': 2, 'dex': 2, 'end':6, 'int':2, 'edu':2, 'soc': 12 } 
+  skills  = { "GunCbt(CbtR)": 2, "Math": 0, "Kissing": 2 }
+  data  = { 'person':p, 'skills': skills,  'stats' : stats}
   cb    = CharacterBuilder(data)
   a     = cb.return_character()
   return a
 
 @pytest.fixture()
 def cb():
-  cb = CharacterBuilder()
+  p       = Person( first_name = "Amanda", last_name = "Lefron", 
+            birthdate = 1432150, gender = "f")
+  stats   = { 'str': 2, 'dex': 2, 'end':6, 'int':2, 'edu':2, 'soc': 12 } 
+  skills  = { "GunCbt(CbtR)": 2, "Math": 0, "Kissing": 2 }
+  data    = { 'person':p, 'skills': skills,  'stats' : stats}
+  cb      = CharacterBuilder(data)
   return cb
 
 @pytest.fixture()
