@@ -4,17 +4,17 @@
 User Tool
 =========
 document: different uses, and which options to use
-feature:  option to get random result from a specified table
+feature:  ?option to get random result from a specified table
 feature:  use Jinja2 templates for html output
+feature:  use FastAPI
+feature:  front page with NGINX
+
 
 Code Quality
 ============
-support:  return to unittest (Low)
 support:  tests use test db
 support:  check out pylint
-support:  better exception handling
 support:  put cb/cb_admin defs into munger
-support:  move to pytest
 
 
 Admin Tool
@@ -29,6 +29,14 @@ feature:  update notes via file option since notes can be long
 
 Containerization
 ================
+support:  move to Repository model(get, set)
+
+
+Data
+====
+refactor: use dataclass and composition
+refactor: move to pytest
+refactor: better exception handling
           
 
 Database
@@ -38,6 +46,7 @@ support:  sample database for extended attributes
 support:  clean out planned but unused data
 support:  put db into Repository with just "get" and "set".
           - See "Architecture Patterns with Python"
+
 
 DONE
 ====
