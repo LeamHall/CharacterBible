@@ -5,15 +5,62 @@
 # desc:     Shared data for tests.
 
 import pytest
+import os
+import sqlite3
+
 from app.person import Person
+from app.person import Character
 from app.person.person_builder import PersonBuilder
+from app.person.character_builder import CharacterBuilder
 from app.datamine import datamine
 
+@pytest.fixture()
+def db():
+  con  = sqlite3.connect(":memory:")
+  cur  = con.cursor()
+
+  all_files = os.listdir('database') 
+  for file in all_files:
+    if file.startswith("write_"):
+      filename = os.path.join('database', file)
+      with open(filename, 'r') as f:
+        sqlcmd = f.read()
+        con.executescript(sqlcmd)
+  for file in all_files:
+    if file.startswith("test_add_"):
+      filename = os.path.join('database', file)
+      with open(filename, 'r') as f:
+          sqlcmd = f.read()
+          con.executescript(sqlcmd)
+  return cur
+ 
 @pytest.fixture()
 def person():
   p   = Person( idx = 123, first_name = "Alba", last_name = "Domici", 
         birthdate = 1416146, gender = "f",  notes = 'Trail Rat')
   return p 
+
+@pytest.fixture()
+def character():
+  stats  = { 'str': 7, 'dex': 8, 'end':10, 'int':6, 'edu':7, 'soc': 12 } 
+  skills = { "GunCbt(CbtR)": 2, "Math": 0, "Kissing": 2 }
+  data   = { 'first_name': 'Al', 'last_name': 'Lefron', 'gender': 'f', 
+      'stats': stats, 'skills':skills }
+  c   = Character(**data)
+  return c
+
+@pytest.fixture()
+def amanda():
+  stats = {'soc': 12} 
+  data  = {'first_name': 'Amanda', 'last_name': 'Lefron', 'gender': 'F', 'stats' : stats}
+  cb    = CharacterBuilder(data)
+  a     = cb.return_character()
+  return a
+
+@pytest.fixture()
+def cb():
+  cb = CharacterBuilder()
+  return cb
 
 @pytest.fixture()
 def pb():
@@ -28,7 +75,6 @@ def person_base():
 
 @pytest.fixture()
 def dm():
-  #dm = datamine.Datamine('data/people.db')
   dm = datamine.Datamine(":memory:")
   dm.build_test_db(":memory:")
   return dm

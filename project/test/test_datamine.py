@@ -14,7 +14,7 @@ def test_datamine(dm):
 def test_basic_connect(dm):
   criteria  = {'table':'people'}
   result    = dm.select(criteria)  
-  assert    len(result) == 1
+  assert    len(result) == 3
 
 def test_table_missing(dm):
   criteria  = {}

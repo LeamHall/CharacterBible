@@ -35,7 +35,6 @@ support:  move to Repository model(get, set)
 Data
 ====
 refactor: use dataclass and composition
-refactor: move to pytest
 refactor: better exception handling
           
 
@@ -75,3 +74,4 @@ document: use docker volume for database location
 support:  makefile for container relocation
 support:  move from docker/* to project/*
 support:  make tests use project/*
+refactor: move to pytest
