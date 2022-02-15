@@ -31,8 +31,17 @@ def test_to_text(person):
   assert actual_string[3] == expected_string_4
   assert actual_string[4] == expected_string_5
 
-def test_to_html(person):
-  actual_string   = person_view.to_html(person).split("\n")
+def test_to_html_without_idx(person):
+  #actual_string   = person_view.to_html(person).split("\n")
+  actual_string   = person_view.to_html(person, idx = False)
+  actual_string   = actual_string.strip()
+  expected_string = "<p><a href=\"people/123\">123</a> Alba Domici [F]</p>"
+  assert actual_string == expected_string
+
+def test_to_html_with_idx(person):
+  actual_string   = person_view.to_html(person, idx = True).split("\n")
+  #actual_string   = person_view.to_html(person, idx = True)
+  #actual_string   = actual_string.strip()
   expected_string_1 = "<p>123 Alba Domici [F]</p>"
   expected_string_2 = "<p>Birthdate: 1416146</p>"
   expected_string_3 = "<p>Plot: </p>"
@@ -46,7 +55,7 @@ def test_to_html(person):
 
 def test_bad_output_type(person):
   with pytest.raises(ValueError):
-    person_view.char_string(person, 'xml')
+    person_view.char_string(person, 'xml', idx = False)
 
 def test_char_string_text(person):
   actual_string   = person_view.to_text(person).split("\n")
@@ -62,7 +71,7 @@ def test_char_string_text(person):
   assert actual_string[4] == expected_string_5
 
 def test_char_string_html(person):
-  actual_string   = person_view.to_html(person).split("\n")
+  actual_string   = person_view.to_html(person, idx = True).split("\n")
   expected_string_1 = "<p>123 Alba Domici [F]</p>"
   expected_string_2 = "<p>Birthdate: 1416146</p>"
   expected_string_3 = "<p>Plot: </p>"
@@ -75,7 +84,7 @@ def test_char_string_html(person):
   assert actual_string[4] == expected_string_5
 
 def test_char_string_csv(person): 
-  actual_string   = person_view.char_string(person, 'csv')
+  actual_string   = person_view.char_string(person, 'csv', idx = False)
   expected_string = '123|Domici|Alba||f|1416146|||Trail Rat'
   assert actual_string == expected_string
 

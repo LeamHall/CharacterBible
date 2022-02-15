@@ -1,8 +1,11 @@
 # name:     view/person.py
-# version:  0.0.1
-# date:     20211224
+# version:  0.0.2
+# date:     20220214
 # author:   Leam Hall
 # desc:     Formatting data for various output types.
+
+## CHANGELOG
+#   20220214  Working on a link for html output.
 
 def make_name(data):
   name = ''
@@ -40,21 +43,25 @@ def to_text(data):
   )
   return string
 
-def to_html(data):
+def to_html(data, idx):
   name    = make_name(data)
   gender  = make_gender(data)
-  string  = (
-    f"<p>{data.idx} {name} [{gender}]</p>\n"
-    f"<p>Birthdate: {data.birthdate}</p>\n"
-    f"<p>Plot: {data.plot}</p>\n"
-    f"<p>Temperament: {data.temperament}</p>\n"
-    f"<p>Notes: {data.notes}</p>\n"
-  )
+  if idx:
+    string  = (
+      f"<p>{data.idx} {name} [{gender}]</p>\n"
+      f"<p>Birthdate: {data.birthdate}</p>\n"
+      f"<p>Plot: {data.plot}</p>\n"
+      f"<p>Temperament: {data.temperament}</p>\n"
+      f"<p>Notes: {data.notes}</p>\n"
+    )
+  else:
+    string = f"<p><a href=\"people/{data.idx}\">{data.idx}</a> {name} [{gender}]</p>"
   return string
-  
-def char_string(data, output_type = 'text'):
+
+#def char_string(data, output_type = 'text'):
+def char_string(data, output_type, idx):
   if output_type    == 'html':
-    out_str = to_html(data)
+    out_str = to_html(data, idx)
   elif output_type  == 'text':
     out_str = to_text(data)
   elif output_type  == 'csv':

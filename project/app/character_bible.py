@@ -58,10 +58,10 @@ def result_to_buildable(result):
   p = pb.set_data(person.Person(), data)
   return p 
   
-def show_results(results, output_type):
+def show_results(results, output_type, idx):
   for r in results:
     P = result_to_buildable(r)
-    print(person_view.char_string(P, output_type))
+    print(person_view.char_string(P, output_type, idx))
     if output_type == 'text':
       print("----")
     elif output_type == 'html':
@@ -99,7 +99,7 @@ except Exception as e:
 if args.idx:
   criteria['idx'] = args.idx
   results = dm.get_by_idx(criteria)
-  show_results(results, output_type = args.output)
+  show_results(results, output_type = args.output, idx = True)
 elif args.column and args.like:
   criteria['like_column']  = args.column
   criteria['like']         = args.like
@@ -107,6 +107,6 @@ elif args.column and args.like:
   show_results(results, defaults['output'])
 else:
   results = dm.select(criteria)
-  show_results(results, args.output)
+  show_results(results, args.output, idx = False)
 
 
