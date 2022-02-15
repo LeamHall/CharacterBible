@@ -9,8 +9,9 @@ feature:  use Jinja2 templates for html output
 feature:  use FastAPI
 feature:  front page with NGINX
 feature:  option to search LIKE and value
-feature:  option to select by ID (main page)
 refactor: move character_bible.py to library
+refactor: web stuff in own libraries
+
  
 Code Quality
 ============
@@ -36,14 +37,15 @@ support:  move to Repository model(get, set)
 Data
 ====
 refactor: better exception handling
-          
+feature:  update via form
+ 
 
 Database
 ========
 document: foriegn key support (sqlite)
 support:  sample database for extended attributes
 support:  clean out planned but unused data
-support:  put db into Repository with just "get" and "set".
+support:  ? put db into Repository with just "get" and "set".
           - See "Architecture Patterns with Python"
 
 
@@ -78,3 +80,4 @@ refactor: move to pytest
 support:  tests use test db
 refactor: use dataclass and composition
 refactor: html output using views
+feature:  option to select by ID (main page)
