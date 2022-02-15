@@ -7,7 +7,7 @@ document: different uses, and which options to use
 feature:  ?option to get random result from a specified table
 feature:  use Jinja2 templates for html output
 feature:  use FastAPI
-feature:  front page with NGINX
+feature:  NGINX proxy app
 feature:  option to search LIKE and value
 refactor: move character_bible.py to library
 refactor: web stuff in own libraries
@@ -81,3 +81,4 @@ support:  tests use test db
 refactor: use dataclass and composition
 refactor: html output using views
 feature:  option to select by ID (main page)
+feature:  front page with NGINX
