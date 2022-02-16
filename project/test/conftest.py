@@ -57,18 +57,20 @@ def amanda():
   stats   = { 'str': 2, 'dex': 2, 'end':6, 'int':2, 'edu':2, 'soc': 12 } 
   skills  = { "GunCbt(CbtR)": 2, "Math": 0, "Kissing": 2 }
   data  = { 'person':p, 'skills': skills,  'stats' : stats}
-  cb    = CharacterBuilder(data)
-  a     = cb.return_character()
+  cb    = CharacterBuilder()
+  print(f"in amanda, cb is {type(cb)}")
+  a     = cb.build(data)
+  print(f"in amanda, a is {type(a)}")
   return a
 
 @pytest.fixture()
 def cb():
-  p       = Person( first_name = "Amanda", last_name = "Lefron", 
-            birthdate = 1432150, gender = "f")
-  stats   = { 'str': 2, 'dex': 2, 'end':6, 'int':2, 'edu':2, 'soc': 12 } 
-  skills  = { "GunCbt(CbtR)": 2, "Math": 0, "Kissing": 2 }
-  data    = { 'person':p, 'skills': skills,  'stats' : stats}
-  cb      = CharacterBuilder(data)
+  #p       = Person( first_name = "Amanda", last_name = "Lefron", 
+  #          birthdate = 1432150, gender = "f")
+  #stats   = { 'str': 2, 'dex': 2, 'end':6, 'int':2, 'edu':2, 'soc': 12 } 
+  #skills  = { "GunCbt(CbtR)": 2, "Math": 0, "Kissing": 2 }
+  #data    = { 'person':p, 'skills': skills,  'stats' : stats}
+  cb      = CharacterBuilder()
   return cb
 
 @pytest.fixture()

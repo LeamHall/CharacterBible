@@ -17,7 +17,8 @@ from .person_builder import PersonBuilder
 
 class CharacterBuilder:
  
-  def __init__(self, data = {}):
+  #def __init__(self, data = {}):
+  def build(self, data = {}):
     self.set_person(data)
     self.set_character(data)
     self.set_stats(data)
@@ -48,6 +49,9 @@ class CharacterBuilder:
     return p
 
   def return_character(self):
-    return self.character
+    c   = self.character
+    print(f"c is a {type(c)}")
+    print(f"returning c {c.supp_4()}")
+    return c
   
   
