@@ -17,19 +17,20 @@ from .person_builder import PersonBuilder
 
 class CharacterBuilder:
  
-  #def __init__(self, data = {}):
   def build(self, data = {}):
     self.set_person(data)
     self.set_character(data)
     self.set_stats(data)
     self.character.gen_upp()
-    self.return_character()
-    
+    c = self.return_character()
+    return c
+ 
   def set_person(self, data):
     self.person = data.get('person', self.gen_person())
 
   def set_character(self, data):
-    data['person'] = data.get('person', Person())
+    #data['person'] = data.get('person', Person())
+    data['person'] = data.get('person', self.person)
     self.character = Character(**data)    
 
   def set_stats(self, data):
@@ -49,9 +50,6 @@ class CharacterBuilder:
     return p
 
   def return_character(self):
-    c   = self.character
-    print(f"c is a {type(c)}")
-    print(f"returning c {c.supp_4()}")
-    return c
+    return self.character 
   
   
