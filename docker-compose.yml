@@ -1,0 +1,21 @@
+#version "3.9"
+
+services:
+
+    db:
+        image: postgres:16.1-alpine3.18
+        hostname: cb_postgres
+        volumes:
+            - ./postgres_data:/var/lib/postgresql/data
+        environment:
+            - "POSTGRES_HOST_AUTH_METHOD=trust"
+        ports:
+            - "5432:5432"
+
+
+#  web:
+#    image: python:3.13.0a1-alpine3.18
+#    hostname: cb
+#    ports:  8008
+
+
