@@ -2,30 +2,6 @@
 
 Character parsing, creation, storage, and retrieval.
 
-## Code samples
+# NOTE:
 
-Database creation in "database/". Sample code in "demo/".
-
-## Requirements
-
-Requires Python 3 and SQLite.
-
-## Usage
-
-```
-./character_bible.py -h
-```
-
-## Admin tool
-
-```
-./cb_admin.py -h
-```
-
-## Building the initial dataset
-
-```
-  demo/build_db.py
-```
-
-
+This is migrating to Django and Postgres, so pretty much everything will change.
