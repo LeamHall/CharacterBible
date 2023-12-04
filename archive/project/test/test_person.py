@@ -9,20 +9,22 @@
 import pytest
 from app.person import Person
 
+
 def test_creation(person):
-  assert isinstance(person, Person)
+    assert isinstance(person, Person)
+
 
 def test_creation_full_data():
-  wilbur = Person(first_name = "Wilbur", last_name = "Lefron")
-  assert wilbur.get_attr('first_name') == 'Wilbur'
+    wilbur = Person(first_name="Wilbur", last_name="Lefron")
+    assert wilbur.get_attr("first_name") == "Wilbur"
+
 
 def test_set_attr_string(person):
-  person.set_attr('middle_name', 'Ester')
-  expected_attr = 'Ester'
-  assert person.get_attr('middle_name') == expected_attr
+    person.set_attr("middle_name", "Ester")
+    expected_attr = "Ester"
+    assert person.get_attr("middle_name") == expected_attr
+
 
 def test_get_attr_fail(person):
-  fail = person.get_attr('kissing habits')
-  assert fail == None
-
- 
+    fail = person.get_attr("kissing habits")
+    assert fail == None

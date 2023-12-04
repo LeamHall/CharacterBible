@@ -15,17 +15,18 @@ from app.person import Person
 from app.person import Character
 from app.person import CharacterBuilder
 
+
 def testCreation(cb):
-  assert(isinstance(cb, CharacterBuilder))
+    assert isinstance(cb, CharacterBuilder)
+
 
 def testCreateName(amanda):
-  assert(amanda.first_name == 'Amanda')
-  assert(amanda.last_name == 'Lefron')
+    assert amanda.first_name == "Amanda"
+    assert amanda.last_name == "Lefron"
+
 
 def testCreateStats(amanda):
-  assert(amanda.stats['soc'] == 12)
-  for s in amanda.stats.keys():
-    assert(amanda.stats[s] >= 2)
-    assert(amanda.stats[s] <= 15)
-
-
+    assert amanda.stats["soc"] == 12
+    for s in amanda.stats.keys():
+        assert amanda.stats[s] >= 2
+        assert amanda.stats[s] <= 15

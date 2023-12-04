@@ -8,25 +8,26 @@
 
 from dataclasses import dataclass, field
 
+
 @dataclass
 class Person:
-  """ Base Person object """
+    """Base Person object"""
 
-  idx:            int = -1
-  last_name:      str = ''
-  first_name:     str = ''
-  middle_name:    str = ''
-  gender:         str = ''
-  birthdate:      int = ''
-  plot:           str = ''
-  temperament:    str = ''
-  notes:          str = ''
+    idx: int = -1
+    last_name: str = ""
+    first_name: str = ""
+    middle_name: str = ""
+    gender: str = ""
+    birthdate: int = ""
+    plot: str = ""
+    temperament: str = ""
+    notes: str = ""
 
-  def set_attr(self, attr, value, key = None):
-    setattr(self, attr, value)
- 
-  def get_attr(self, attr):
-    if hasattr(self, attr):
-      return getattr(self,attr)
-    else:
-      return None
+    def set_attr(self, attr, value, key=None):
+        setattr(self, attr, value)
+
+    def get_attr(self, attr):
+        if hasattr(self, attr):
+            return getattr(self, attr)
+        else:
+            return None

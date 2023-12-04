@@ -9,50 +9,49 @@
 import random
 from person import Character
 from person import Person
-#from character import Character
 
-#import person
+# from character import Character
+
+# import person
 
 #  birth_year: int = 0
 #  birth_day:  int = 0
 #  notes:      str = ''
 
+
 class CharacterBuilder:
- 
-  def __init__(self, data = {}):
-    self.character = Character()
-    self.set_stats(data)
-    self.set_data(data)
-    self.character.gen_upp()
-    self.return_character()
-    
+    def __init__(self, data={}):
+        self.character = Character()
+        self.set_stats(data)
+        self.set_data(data)
+        self.character.gen_upp()
+        self.return_character()
 
-  def set_stats(self, data):
-    stats = data.get('stats', {})
-    stat_data = {}
-    for stat in ['str', 'dex', 'end', 'int', 'edu', 'soc']:
-      stat_data[stat] = stats.get(stat, self.roll_2d6())
-    self.character.set_stats(stat_data)
-      
+    def set_stats(self, data):
+        stats = data.get("stats", {})
+        stat_data = {}
+        for stat in ["str", "dex", "end", "int", "edu", "soc"]:
+            stat_data[stat] = stats.get(stat, self.roll_2d6())
+        self.character.set_stats(stat_data)
 
-  def roll_2d6(self):
-    return random.randint(1,6) + random.randint(1,6)
- 
-  def set_data(self, data):
-    self.character.gender     = data.get('gender', self.gen_gender())
-    self.character.first_name = data.get('first_name', self.gen_first_name(self.character.gender))
-    self.character.last_name  = data.get('last_name', self.gen_last_name())
+    def roll_2d6(self):
+        return random.randint(1, 6) + random.randint(1, 6)
 
-  def gen_gender(self):
-    return 'M'
+    def set_data(self, data):
+        self.character.gender = data.get("gender", self.gen_gender())
+        self.character.first_name = data.get(
+            "first_name", self.gen_first_name(self.character.gender)
+        )
+        self.character.last_name = data.get("last_name", self.gen_last_name())
 
-  def gen_first_name(self, gender):
-    return 'Fred'
+    def gen_gender(self):
+        return "M"
 
-  def gen_last_name(self):
-    return 'Smith'
+    def gen_first_name(self, gender):
+        return "Fred"
 
-  def return_character(self):
-    return self.character
-  
-  
+    def gen_last_name(self):
+        return "Smith"
+
+    def return_character(self):
+        return self.character
