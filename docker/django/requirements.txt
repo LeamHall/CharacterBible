@@ -1,3 +1,4 @@
 django
 psycopg[binary]
-
+django-crispy-forms
+crispy-bootstrap5

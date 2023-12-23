@@ -1,16 +1,12 @@
 <!-- templates/home.html -->
 {% extends "_base.html" %}
+{% load static %}
 
-{% block title %}Home{% endblock title %}
+{% block title %}Character Bible{% endblock title %}
 
 {% block content %}
-    <h2>Homepage</h2>
+    <h2>Character Bible</h2>
 
-{% if user.is_authenticated %}
-  <h3>Hello, {{ user.email }}. </p>
-{% else %}
-  <p>You are not logged in</p>
-  <a href="{% url 'login' %}">Log In</a>
-{% endif %}
+<img class="django_logo" src="{% static 'images/django_logo.png' %}">
 {% endblock content %}
 
