@@ -5,4 +5,4 @@ __pycache__
 tmp/
 .venv
 postgres_data/
-
+docker/django/code/staticfiles/
