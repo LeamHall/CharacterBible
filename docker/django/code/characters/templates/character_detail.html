@@ -1,0 +1,12 @@
+
+{% extends "_base.html" %}
+
+{% block title %}{{ character.first_name }}{% endblock title %}
+
+{% block content %}
+    <div class = "character-detail">
+        <h2><a href="">{{ character.first_name }}</a></h2>
+        <p>Notes: {{ character.notes }}</p>
+    </div>
+{% endblock content %}
+

@@ -1,0 +1,12 @@
+{% extends "_base.html" %}
+
+{% block title %}Characters{% endblock title %}
+
+{% block content %}
+    {% for character in character_list %}
+        <div>
+            <h2><a href="">{{ character.first_name }}</a></h2>
+        <div>
+    {% endfor %}
+{% endblock content %}
+
