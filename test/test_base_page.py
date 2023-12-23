@@ -7,11 +7,11 @@
 import unittest
 from selenium import webdriver
 
-class TestBasePage(unittest.TestCase):
 
+class TestBasePage(unittest.TestCase):
     def setUp(self):
         self.browser = webdriver.Firefox()
-        self.browser.get('http://10.0.0.10:8000')
+        self.browser.get("http://10.0.0.10:8000")
 
     def tearDown(self):
         self.browser.quit()
@@ -19,5 +19,3 @@ class TestBasePage(unittest.TestCase):
     def test_base_page_hello(self):
         text = self.browser.page_source
         self.assertIn("Hello", text)
-
-

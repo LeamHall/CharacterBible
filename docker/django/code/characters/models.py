@@ -9,15 +9,11 @@ class Character(models.Model):
         default=uuid.uuid4,
         editable=False,
     )
-    first_name = models.CharField(max_length=25)
-    last_name = models.CharField(max_length=35)
+    first_name = models.CharField(max_length=25, default="FNU")
+    last_name = models.CharField(max_length=35, default="LNU")
     notes = models.TextField()
 
     def __str__(self):
-        if not self.first_name:
-            self.first_name = "FNU"
-        if not self.last_name:
-            self.last_name = "LNU"
         return "{} {}".format(self.first_name, self.last_name)
 
     @property

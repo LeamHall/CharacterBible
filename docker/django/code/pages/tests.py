@@ -25,6 +25,7 @@ class HomepageTests(SimpleTestCase):
         view = resolve("/")
         self.assertEqual(view.func.__name__, HomePageView.as_view().__name__)
 
+
 class AboutPageTests(SimpleTestCase):
     def setUp(self):
         url = reverse("about")
@@ -38,7 +39,7 @@ class AboutPageTests(SimpleTestCase):
 
     def test_aboutpage_contains_correct_html(self):
         self.assertContains(self.response, "About This Project")
-    
+
     def self_aboutpage_not_contain_incorrect_html(self):
         self.assertNotContains(self.response, "Fred")
 
