@@ -12,4 +12,5 @@ class CharacterListView(ListView):
 
 class CharacterDetailView(ListView):
     model = Character
+    context_object_name = "character"
     template_name = "character_detail.html"

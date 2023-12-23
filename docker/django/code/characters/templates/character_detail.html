@@ -1,11 +1,13 @@
+<!-- templates/character_detail.hml -->
 
 {% extends "_base.html" %}
+{% load static %}
 
-{% block title %}{{ character.first_name }}{% endblock title %}
+{% block title %}{{ character.name }}{% endblock title %}
 
 {% block content %}
     <div class = "character-detail">
-        <h2><a href="">{{ character.first_name }}</a></h2>
+        <p>Details about: {{ character.name }}</a></p>
         <p>Notes: {{ character.notes }}</p>
     </div>
 {% endblock content %}

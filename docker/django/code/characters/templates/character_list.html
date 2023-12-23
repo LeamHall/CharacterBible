@@ -1,3 +1,5 @@
+<!-- templates/character_list.html -->
+
 {% extends "_base.html" %}
 
 {% block title %}Characters{% endblock title %}
@@ -5,7 +7,7 @@
 {% block content %}
     {% for character in character_list %}
         <div>
-            <h2><a href="">{{ character.first_name }}</a></h2>
+            <p><a href="{% url 'character_detail' character.pk %}">{{ character }}</a></p>
         <div>
     {% endfor %}
 {% endblock content %}
