@@ -17,7 +17,8 @@ Containers
 3.2   See the database.txt file for installing a sample database.
 
 4.  Build and run the Docker image.
-4.1   docker build -t characterbible -f project/Dockerfile .
-4.2   docker run -it --rm -p 8000:8000 -v $(pwd)/project/data:/data --name characterbible characterbible
+4.1   cd docker/django
+4.2   docker build -t characterbible-web -f Dockerfile .
+#4.3   docker run -it --rm -p 8000:8000 -v $(pwd)/project/data:/data --name characterbible characterbible
 
   
