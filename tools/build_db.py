@@ -6,10 +6,15 @@
 # author:   Leam Hall
 # desc:     Build and populate the database.
 
+"""
+Build the chargen database.
+"""
+
 import argparse
 from configparser import ConfigParser
-import sqlite3
 import os
+import sqlite3
+import sys
 
 arg_parser = argparse.ArgumentParser()
 arg_parser.add_argument("-d", "--db", type=str)
@@ -37,15 +42,15 @@ try:
     database = os.path.join(config["datadir"], config["db"])
     con = sqlite3.connect(database)
     cur = con.cursor()
-except Exception as e:
+except sqlite3.OperationalError as e:
     print(e)
-    os.exit()
+    sys.exit()
 
 start_dir = os.getcwd()
-all_files = os.listdir("database")
+all_files = os.listdir("sql")
 build_files = []
 add_files = []
-os.chdir("database")
+os.chdir("sql")
 for file in all_files:
     if file.startswith("write_"):
         build_files.append(file)
@@ -55,7 +60,8 @@ for file in all_files:
         add_files.append(file)
 
 for file in build_files + add_files:
-    with open(file, "r") as f:
+    print(file)
+    with open(file, "r", encoding="utf-8") as f:
         sqlcmd = f.read()
         cur.executescript(sqlcmd)
 

@@ -1,5 +1,6 @@
 
 *.swp
+*.db
 .last_cover_stats
 __pycache__
 tmp/
