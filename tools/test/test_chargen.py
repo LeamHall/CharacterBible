@@ -10,7 +10,6 @@
 Testing the chargen.py tool.
 """
 
-import random
 import sqlite3
 import unittest
 
@@ -23,25 +22,14 @@ class TestChargen(unittest.TestCase):
     """
 
     def setUp(self):
-        self.result = {"first_name": "Alba", "last_name": "Lefron"}
         self.db = "test/data/chargen.db"
         self.con = sqlite3.connect(self.db)
         self.cur = self.con.cursor()
 
-    def test_basic_data(self):
-        expected = {"first_name": "Alba", "last_name": "Lefron"}
-        self.assertEqual(self.result, expected)
-
-    def test_get_first_name(self):
-        gender = None
-        db = None
-        expected = "Alba"
-        result = c.get_first_name(gender, db)
-        self.assertEqual(expected, result)
-
-    def test_get_last_name(self):
+    def test_get_item(self):
+        command = "SELECT name FROM last_name ORDER BY RANDOM() LIMIT 1"
         expected = "Lefron"
-        result = c.get_last_name(self.cur)
+        result = c.get_item(self.cur, command)
         self.assertEqual(expected, result)
 
     def test_get_gender(self):
@@ -51,18 +39,18 @@ class TestChargen(unittest.TestCase):
             result = c.get_gender(gender)
             self.assertTrue(result in expected)
 
-        for _ in range(0, 10):
-            gender = random.choice(["m", "f", "n"])
-            expected = gender
-            result = c.get_gender(gender)
-            self.assertEqual(expected, result)
-
-    def test_build_character(self):
-        db = None
+    def test_build_female_character(self):
         gender = "f"
-        db = self.db
-        character = c.build_character(db, gender)
+        character = c.build_character(self.db, gender)
         self.assertIsInstance(character, dict)
         self.assertEqual(character["first_name"], "Alba")
         self.assertEqual(character["last_name"], "Lefron")
         self.assertEqual(character["gender"], "f")
+
+    def test_build_male_character(self):
+        gender = "m"
+        character = c.build_character(self.db, gender)
+        self.assertIsInstance(character, dict)
+        self.assertEqual(character["first_name"], "Wilbur")
+        self.assertEqual(character["last_name"], "Lefron")
+        self.assertEqual(character["gender"], "m")

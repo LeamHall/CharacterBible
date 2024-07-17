@@ -16,17 +16,10 @@ import sqlite3
 DB = "data/chargen.db"
 
 
-def get_first_name(gender, db):
-    """Return a random first name based on gender, if none given."""
-    return "Alba"
-
-
-def get_last_name(cur):
-    """Return a random last name if none given."""
-    command = "SELECT name FROM last_name LIMIT 1"
+def get_item(cur, command):
     result = cur.execute(command)
-    name = result.fetchone()[0]
-    return name
+    item = result.fetchone()[0]
+    return item
 
 
 def get_gender(gender):
@@ -42,9 +35,19 @@ def build_character(database, gender=None):
     cur = con.cursor()
 
     gender = get_gender(gender)
+    if gender == "f":
+        f_name_cmd = (
+            "SELECT name FROM female_first_name ORDER BY RANDOM() LIMIT 1;"
+        )
+    else:
+        f_name_cmd = (
+            "SELECT name FROM male_first_name ORDER BY RANDOM() LIMIT 1;"
+        )
+
+    l_name_cmd = "SELECT name FROM last_name ORDER BY RANDOM() LIMIT 1;"
     c = {
-        "first_name": get_first_name(gender, None),
-        "last_name": get_last_name(cur),
+        "first_name": get_item(cur, f_name_cmd),
+        "last_name": get_item(cur, l_name_cmd),
         "gender": gender,
     }
 
@@ -52,6 +55,4 @@ def build_character(database, gender=None):
 
 
 if __name__ == "__main__":
-    db = DB
-
-    character = build_character(db, gender=None)
+    character = build_character(DB, gender=None)
