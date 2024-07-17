@@ -51,8 +51,10 @@ def build_character(database, gender=None):
         "gender": gender,
     }
 
+    cur.close()
     return c
 
 
 if __name__ == "__main__":
     character = build_character(DB, gender=None)
+    print(character)
