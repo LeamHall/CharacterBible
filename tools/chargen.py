@@ -10,16 +10,37 @@
 Create a character.
 """
 
+import argparse
 import random
 import sqlite3
+import sys
 
-DB = "data/chargen.db"
+
+def parse_args():
+    """Takes the arguments and returns the final config."""
+    parser = argparse.ArgumentParser(
+        prog="chargen.py",
+        description="Generates basic characters for games.",
+        epilog="",
+    )
+
+    parser.add_argument(
+        "-d", "--database", help="database filename", default="data/chargen.db"
+    )
+    parser.add_argument(
+        "-n",
+        "--number",
+        help="number of characters",
+        type=int,
+        default=1,
+    )
+    return parser.parse_args()
 
 
-def get_item(cur, command):
-    result = cur.execute(command)
-    item = result.fetchone()[0]
-    return item
+def get_item(cursor, command):
+    """Returns one item using the given command."""
+    result = cursor.execute(command)
+    return result.fetchone()[0]
 
 
 def get_gender(gender):
@@ -29,11 +50,14 @@ def get_gender(gender):
     return gender
 
 
-def build_character(database, gender=None):
-    """Build the character data structure."""
+def get_cursor(database):
+    """Establish the connection and return it."""
     con = sqlite3.connect(database)
-    cur = con.cursor()
+    return con.cursor()
 
+
+def build_character(cursor, gender=None):
+    """Build the character data structure."""
     gender = get_gender(gender)
     if gender == "f":
         f_name_cmd = (
@@ -46,15 +70,25 @@ def build_character(database, gender=None):
 
     l_name_cmd = "SELECT name FROM last_name ORDER BY RANDOM() LIMIT 1;"
     c = {
-        "first_name": get_item(cur, f_name_cmd),
-        "last_name": get_item(cur, l_name_cmd),
+        "first_name": get_item(cursor, f_name_cmd),
+        "last_name": get_item(cursor, l_name_cmd),
         "gender": gender,
     }
 
-    cur.close()
     return c
 
 
 if __name__ == "__main__":
-    character = build_character(DB, gender=None)
-    print(character)
+    args = parse_args()
+    try:
+        cur = get_cursor(args.database)
+    except sqlite3.Error as e:
+        print(e)
+        sys.exit(1)
+    else:
+        for _ in range(0, args.number):
+            character = build_character(cur, gender=None)
+            print(character)
+            print("")
+    finally:
+        cur.close()

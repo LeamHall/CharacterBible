@@ -10,8 +10,11 @@
 Testing the chargen.py tool.
 """
 
+import argparse
 import sqlite3
+import sys
 import unittest
+from unittest.mock import patch
 
 import chargen as c
 
@@ -41,7 +44,8 @@ class TestChargen(unittest.TestCase):
 
     def test_build_female_character(self):
         gender = "f"
-        character = c.build_character(self.db, gender)
+        cur = c.get_cursor(self.db)
+        character = c.build_character(cur, gender)
         self.assertIsInstance(character, dict)
         self.assertEqual(character["first_name"], "Alba")
         self.assertEqual(character["last_name"], "Lefron")
@@ -49,8 +53,21 @@ class TestChargen(unittest.TestCase):
 
     def test_build_male_character(self):
         gender = "m"
-        character = c.build_character(self.db, gender)
+        cur = c.get_cursor(self.db)
+        character = c.build_character(cur, gender)
         self.assertIsInstance(character, dict)
         self.assertEqual(character["first_name"], "Wilbur")
         self.assertEqual(character["last_name"], "Lefron")
         self.assertEqual(character["gender"], "m")
+
+    def test_get_cursor(self):
+        result = c.get_cursor(self.db)
+        self.assertIsInstance(result, sqlite3.Cursor)
+
+    def test_parse_args(self):
+        testargs = ["chargen.py", "-d", self.db, "-n", "5"]
+        with patch.object(sys, "argv", testargs):
+            result = c.parse_args()
+            self.assertIsInstance(result, argparse.Namespace)
+            self.assertEqual(result.database, "test/data/chargen.db")
+            self.assertEqual(result.number, 5)
