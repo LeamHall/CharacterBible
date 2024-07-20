@@ -101,3 +101,34 @@ class TestChargen(unittest.TestCase):
             self.assertIsInstance(result, argparse.Namespace)
             self.assertEqual(result.database, self.db)
             self.assertEqual(result.number, 5)
+
+    def test_roll_d6(self):
+        for _ in range(100):
+            result = c.roll_d6(1)
+            self.assertTrue(result >= 1)
+            self.assertTrue(result <= 6)
+
+        for _ in range(100):
+            result = c.roll_d6(2)
+            self.assertTrue(result >= 2)
+            self.assertTrue(result <= 12)
+
+    def test_roll_stats(self):
+        result = c.roll_stats()
+        for value in result["2d6"].values():
+            self.assertTrue(value >= 2)
+            self.assertTrue(value <= 15)
+
+    def test_roll_modified_d6(self):
+        expected = range(12, 17)
+        result = c.roll_modified_d6(10)
+        self.assertIn(result, expected)
+
+    def test_stat_modifier(self):
+        expected = "+3"
+        result = c.stat_modifier(18, 3)
+        self.assertEqual(expected, result)
+
+        expected = "+2"
+        result = c.stat_modifier(17, 3)
+        self.assertEqual(expected, result)
