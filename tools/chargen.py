@@ -69,9 +69,15 @@ def build_character(cursor, gender=None):
         )
 
     l_name_cmd = "SELECT name FROM last_name ORDER BY RANDOM() LIMIT 1;"
+    plot_cmd = "SELECT plot from plots ORDER BY RANDOM() LIMIT 1;"
+    temperament_cmd = (
+        "SELECT temperament from temperaments ORDER BY RANDOM() LIMIT 1;"
+    )
     c = {
         "first_name": get_item(cursor, f_name_cmd),
         "last_name": get_item(cursor, l_name_cmd),
+        "plot": get_item(cursor, plot_cmd),
+        "temperament": get_item(cursor, temperament_cmd),
         "gender": gender,
     }
 

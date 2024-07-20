@@ -11,12 +11,14 @@ Testing the chargen.py tool.
 """
 
 import argparse
+import os.path
 import sqlite3
 import sys
+import tempfile
 import unittest
 from unittest.mock import patch
 
-import chargen as c
+import tools.chargen as c
 
 
 class TestChargen(unittest.TestCase):
@@ -25,9 +27,33 @@ class TestChargen(unittest.TestCase):
     """
 
     def setUp(self):
-        self.db = "test/data/chargen.db"
+        self.test_dir = tempfile.TemporaryDirectory()  # pylint: disable=R1732
+        self.db = os.path.join(self.test_dir.name, "test_chargen.db")
         self.con = sqlite3.connect(self.db)
-        self.cur = self.con.cursor()
+        with self.con:
+            self.cur = self.con.cursor()
+            create_commands = [
+                "CREATE TABLE plots (plot  TEXT);",
+                "CREATE TABLE temperaments (temperament);",
+                "CREATE TABLE male_first_name ( name varchar[20] UNIQUE);",
+                "CREATE TABLE female_first_name ( name varchar[20] UNIQUE);",
+                "CREATE TABLE last_name ( name varchar[20] UNIQUE);",
+            ]
+            for command in create_commands:
+                self.cur.execute(command)
+            self.con.commit()
+            insert_commands = [
+                "INSERT INTO plots VALUES ('trauma');",
+                "INSERT INTO temperaments VALUES ('Teacher');",
+                "INSERT INTO last_name VALUES ('Lefron');",
+                "INSERT INTO female_first_name VALUES ('Alba');",
+                "INSERT INTO male_first_name VALUES ('Wilbur');",
+            ]
+            for command in insert_commands:
+                self.cur.execute(command)
+
+    def tearDown(self):
+        self.test_dir.cleanup()
 
     def test_get_item(self):
         command = "SELECT name FROM last_name ORDER BY RANDOM() LIMIT 1"
@@ -50,6 +76,8 @@ class TestChargen(unittest.TestCase):
         self.assertEqual(character["first_name"], "Alba")
         self.assertEqual(character["last_name"], "Lefron")
         self.assertEqual(character["gender"], "f")
+        self.assertEqual(character["plot"], "trauma")
+        self.assertEqual(character["temperament"], "Teacher")
 
     def test_build_male_character(self):
         gender = "m"
@@ -59,6 +87,8 @@ class TestChargen(unittest.TestCase):
         self.assertEqual(character["first_name"], "Wilbur")
         self.assertEqual(character["last_name"], "Lefron")
         self.assertEqual(character["gender"], "m")
+        self.assertEqual(character["plot"], "trauma")
+        self.assertEqual(character["temperament"], "Teacher")
 
     def test_get_cursor(self):
         result = c.get_cursor(self.db)
@@ -69,5 +99,5 @@ class TestChargen(unittest.TestCase):
         with patch.object(sys, "argv", testargs):
             result = c.parse_args()
             self.assertIsInstance(result, argparse.Namespace)
-            self.assertEqual(result.database, "test/data/chargen.db")
+            self.assertEqual(result.database, self.db)
             self.assertEqual(result.number, 5)

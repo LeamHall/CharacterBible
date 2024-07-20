@@ -9,18 +9,18 @@
 
 import sqlite3
 
-datafile = "data/sample_people.csv"
-db = "data/people.db"
-con = sqlite3.connect(db)
-cur = con.cursor()
+DATAFILE = "data/sample_people.csv"
+DB = "data/people.db"
+CON = sqlite3.connect(DB)
+CUR = CON.cursor()
 
 # schema and populate people from csv.
-query = """INSERT INTO people (last_name, first_name, gender, birthdate, notes ) 
-              VALUES ( :last_name, :first_name, :gender, :birthdate, :notes )"""
+QUERY = """INSERT INTO people (last_name, first_name, gender, birthdate, notes)
+              VALUES ( :last_name, :first_name, :gender, :birthdate, :notes)"""
 
-con.commit()
+CON.commit()
 
-with open(datafile, "r") as data:
+with open(DATAFILE, "r") as data:
     for line in data.readlines():
         line = line.strip()
         (
@@ -43,7 +43,7 @@ with open(datafile, "r") as data:
         data["plot"] = plot
         data["temperament"] = temperament
         data["notes"] = notes
-        cur.execute(query, data)
-        con.commit()
+        CUR.execute(QUERY, data)
+        CON.commit()
 
-con.close()
+CON.close()
